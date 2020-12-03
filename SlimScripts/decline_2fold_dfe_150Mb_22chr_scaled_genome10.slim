@@ -1,0 +1,53 @@
+//To run:
+//slim -d d_seed=seed -d d_f0=f0 -d d_f1=f1 -d d_f2=f2 -d d_f3=f3 -d "d_simID='simNum'" -d "d_repID='genome number'" -d "d_chrNum='chromosome number'" -d "d_folder='/scratch/kriall/decline_dfe_150Mb_22chr_scaled_genome10'" decline_dfe_150Mb_22chr_scaled_genome10.slim
+
+initialize() {
+    setSeed(d_seed);
+    inter_len = 15750;
+    intron_len = 1500;
+    exon_len = 350;
+    num_genes = 5164; // 1391;
+    num_exons = 8;
+    num_introns = 7;
+    full_block_len = inter_len + exon_len*num_exons + intron_len*num_introns;
+    exon_block_len = exon_len + intron_len;
+    
+    //initializeTreeSeq();
+    initializeMutationRate(1e-7);
+    initializeMutationType("m1", 0.5, "f", 0.0);
+    initializeMutationType("m2", 0.5, "s", "return runif(1, -8.13e-3, -8.13e-4);");//(-10, -1)
+    initializeMutationType("m3", 0.5, "s", "return runif(1, -8.13e-2, -8.13e-3);");//(-100, -10)
+    initializeMutationType("m4", 0.5, "s", "return runif(1, -1.0, -8.13e-2);");//(-N_anc, -100)
+    initializeGenomicElementType("g1", m1, 1.0);
+    initializeGenomicElementType("g2", m1, 1.0);
+    initializeGenomicElementType("g3", c(m1, m2, m3, m4), c(d_f0, d_f1, d_f2, d_f3));
+    //defining genes
+    for (index_a in 0:(num_genes-1)){
+        //print (index1);
+        initializeGenomicElement(g1, (index_a*full_block_len), (index_a*full_block_len + inter_len-1)); //intergenic
+        for (index_b in 0:(num_introns-1)){
+            //print (index_a);
+            //print (index_b);
+            initializeGenomicElement(g3, ((index_a*full_block_len) + inter_len + (index_b*exon_block_len)), (index_a*full_block_len + inter_len + index_b*exon_block_len + exon_len - 1));//exon
+            initializeGenomicElement(g2, (index_a*full_block_len + inter_len + index_b*exon_block_len + exon_len), (index_a*full_block_len + inter_len + index_b*exon_block_len + exon_len + intron_len-1));//intron
+            }
+        initializeGenomicElement(g3, (index_a*full_block_len + inter_len + (index_b+1)*exon_block_len), (index_a*full_block_len + inter_len + (index_b+1)*exon_block_len + exon_len - 1));//closing with exon
+        }
+    initializeGenomicElement(g1, full_block_len*num_genes, full_block_len*num_genes + inter_len - 1);//extra intergenic towards the end
+    initializeRecombinationRate(1e-7);
+}
+1 {
+    sim.addSubpop("p1", 1230);
+}
+12300: {
+    newSize = 615;            
+    p1.setSubpopulationSize(asInteger(newSize));
+    
+}
+12775 late(){
+    p1.outputMSSample(100, F, "*", d_folder + "/sim" + d_simID + "/output_genome" + d_repID + "_chr" + d_chrNum + ".ms", F);
+    print(p1.individualCount);
+    
+}
+
+

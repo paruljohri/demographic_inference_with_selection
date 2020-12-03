@@ -1,0 +1,11 @@
+// Search ranges and rules file
+// ****************************
+
+[PARAMETERS]
+//#isInt? #name   #dist.#min  #max 
+//all Ns are in number of haploid individuals
+1  NCurrent$  unif  10  1e5  output
+
+[RULES]
+
+[COMPLEX PARAMETERS]
