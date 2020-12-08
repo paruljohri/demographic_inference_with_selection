@@ -2,10 +2,10 @@
 This is the list of files and folders that are included in the Supplemental information for the manuscript titled "The impact of purifying and background selection on the inference of population history: problems and prospects" by Johri et al. Contact pjohri1@asu.edu for questions.
 
 1. General workflow and command lines for performing simulations and demographic inference:
->>Pipeline_MSMC_chr_segments.txt //workflow for chromosome segments of varying sizes under neutral equilibrium with MSMC
->>Pipeline_FSC_chr_segments.txt //workflow for chromosome segments of varying sizes under neutral equilibrium with fastsimcoal2
->>Pipeline_MSMC_human_chr.txt //workflow for human-like genomes under different demographic histories and selection (with MSMC)
->>Pipeline_FSC_human_chr.txt ////workflow for human-like genomes under different demographic histories and selection (with fastsimcoal2)
+>> Pipeline_MSMC_chr_segments.txt //workflow for chromosome segments of varying sizes under neutral equilibrium with MSMC.
+>> Pipeline_FSC_chr_segments.txt //workflow for chromosome segments of varying sizes under neutral equilibrium with fastsimcoal2.
+>> Pipeline_MSMC_human_chr.txt //workflow for human-like genomes under different demographic histories and selection (with MSMC).
+>> Pipeline_FSC_human_chr.txt //workflow for human-like genomes under different demographic histories and selection (with fastsimcoal2).
 
 2. Scripts to perform simulations in SliM.
 Folder: SlimScripts
