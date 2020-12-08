@@ -1,0 +1,38 @@
+#General workflow for simulating chromosomal segments of varying sizes under neutral equilibrium and inferring demography using FSC
+#Updated on December 7, 2020
+
+#Step1: simulations in SliM
+slim -d d_seed=${seed} -d "d_repID='replicate_num'" -d "d_folder='output_foldername'" SlimScripts/eqm_single_chr_10Mb.slim
+
+#Alt Step 1: simulations in Msprime:
+python MsprimeScripts/simulate_msprime.py eqm_neutral_10Mb_msp 10000000 1 ${replicate_num} ${seed}
+python MsprimeScripts/simulate_msprime.py eqm_neutral_50Mb_msp 50000000 1 ${replicate_num} ${seed}
+python MsprimeScripts/simulate_msprime.py eqm_neutral_200Mb_msp 200000000 1 ${replicate_num} ${seed}
+python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${replicate_num} ${seed}
+
+#Possible inputs:
+#${seed} = (any random seed of your choosing)
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+
+
+
+#Step2: make SFS for varying SNP densities
+python XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+
+#Step3: run fastsimcoal2
+cd XXXXXXXXXXXXXcan give folder nameXXXXXXXXXXXXXXXXXXXXXX
+fsc26 -t Fastsimcoal2_Inputfiles/${model_to_test}.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/${model_to_test}.est -M -L 50 -q -T
+
+Possible inputs:
+${model_to_test} = (eqm, size_change_exponential, size_change_inst, inst_bot)
+
+
+
+#Step4: plot results
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+
+

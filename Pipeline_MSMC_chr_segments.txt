@@ -1,0 +1,35 @@
+#General workflow for simulating chromosomal segments of varying sizes under neutral equilibrium and inferring demography using MSMC 
+#Updated on December 7, 2020
+
+#Step1: simulations in SliM
+slim -d d_seed=${seed} -d "d_repID='replicate_num'" -d "d_folder='output_foldername'" SlimScripts/eqm_single_chr_10Mb.slim
+
+#Alt Step 1: simulations in Msprime:
+python MsprimeScripts/simulate_msprime.py eqm_neutral_10Mb_msp 10000000 1 ${replicate_num} ${seed}
+python MsprimeScripts/simulate_msprime.py eqm_neutral_50Mb_msp 50000000 1 ${replicate_num} ${seed}
+python MsprimeScripts/simulate_msprime.py eqm_neutral_200Mb_msp 200000000 1 ${replicate_num} ${seed}
+python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${replicate_num} ${seed}
+
+#Possible inputs:
+#${seed} = (any random seed of your choosing)
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+
+
+
+#Step2: make the input file (.tab format) for MSMC
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+#Step3: run MSMC
+msmc_1.1.0_linux64bit -r 1.0 -t 1 -o XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXXXXXXXXXXXXX_rep${replicate_num}.tab
+
+Possible inputs:
+${replicate_num} = (1, 2, 3, 4, 5, ... , 99, 100)
+
+
+
+#Step5: transform MSMC output files, average them and plot them
+python XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+
+
+
