@@ -9,13 +9,13 @@ This is the list of files and folders that are included in the Supplemental info
 
 2. Scripts to perform simulations in SliM.
 Folder: SlimScripts
->> eqm_single_chr_10Mb.slim //Slim script for 10Mb chromosome under neutral equilibrium
->> eqm_dfe_150Mb_22chr_scaled_genome20.slim //Slim script for equilibrium (20% of the genome is exonic)
->> eqm_dfe_150Mb_22chr_scaled_genome10.slim //Slim script for equilibrium (10% of the genome is exonic)
->> eqm_dfe_150Mb_22chr_scaled_genome05.slim //Slim script for equilibrium (5% of the genome is exonic)
->> growth_dfe_150Mb_22chr_genome20.slim //Slim script for 30-fold exponential growth (20% of the genome is exonic)
->> growth_dfe_150Mb_22chr_genome10.slim //Slim script for 30-fold exponential growth (10% of the genome is exonic)
->> growth_dfe_150Mb_22chr_genome05.slim //Slim script for 30-fold exponential growth (05% of the genome is exonic)
+>> eqm_single_chr_10Mb.slim //Slim script for 10Mb chromosome under neutral equilibrium\
+>> eqm_dfe_150Mb_22chr_scaled_genome20.slim //Slim script for equilibrium (20% of the genome is exonic)\
+>> eqm_dfe_150Mb_22chr_scaled_genome10.slim //Slim script for equilibrium (10% of the genome is exonic)\
+>> eqm_dfe_150Mb_22chr_scaled_genome05.slim //Slim script for equilibrium (5% of the genome is exonic)\
+>> growth_dfe_150Mb_22chr_genome20.slim //Slim script for 30-fold exponential growth (20% of the genome is exonic)\
+>> growth_dfe_150Mb_22chr_genome10.slim //Slim script for 30-fold exponential growth (10% of the genome is exonic)\
+>> growth_dfe_150Mb_22chr_genome05.slim //Slim script for 30-fold exponential growth (05% of the genome is exonic)\
 >> growth_2fold_dfe_150Mb_22chr_genome20.slim //Slim script for 2-fold exponential growth (20% of the genome is exonic)\
 >> growth_2fold_dfe_150Mb_22chr_genome10.slim //Slim script for 2-fold exponential growth (10% of the genome is exonic)\
 >> growth_2fold_dfe_150Mb_22chr_genome05.slim //Slim script for 2-fold exponential growth (5% of the genome is exonic)\
