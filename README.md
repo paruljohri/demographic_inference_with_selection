@@ -48,7 +48,7 @@ Folder: OtherScripts
 
 5. Input files of MSMC
 Folder: MSMC_InputFiles
->> WORK IN PROGRESS\
+>> Find a location to host\
 
 6. Output files of MSMC
 Folder: MSMC_OutputFiles
@@ -65,7 +65,7 @@ Folder: Fastsimcoal2_InputFiles
 
 8. Input SFS for fastsimcoal2
 Folder: Fastsimcoal2_InputFiles_SFS
->> SFS input files needed to run fastsimcoal2
+>> SFS input files needed to run fastsimcoal2. View the Readme in the folder to  access the correct file.\
 
 9. Output files for fastsimcoal2
 Folder: Fastsimcoal2_OutputFiles
