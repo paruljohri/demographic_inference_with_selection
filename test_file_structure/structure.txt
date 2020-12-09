@@ -1,0 +1,6 @@
+So the folders themselves can vary based on the demographic model, the functional density, 
+and the DFE shape. Within each of the final folders in a path though, all of the files 
+going into said folder will still vary based on whether or not they are masked, 
+as well as their SNP density for the FSC folders, but won't be seperated into 
+individual folders. Also, for decline and growth, the 2x fold changes and 6x / 30x files 
+will also all be together in that same end folder. Does this look good?
