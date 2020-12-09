@@ -46,10 +46,5 @@ fsc26 -t Fastsimcoal2_InputFiles/${tested_model}_${SNP_density}_${segment_size}_
 
 
 
-
 #Step4: plot results
-Use the "plot_msmc_and_fsc_results_single_segment.py" script, can configure the scenario parameters, including the segment size, number of replicated, and SNP density in the script itself 
-
-
-
-
+Use the "plot_msmc_and_fsc_results_single_segment.py" script.  The scenario parameters, including the segment size, number of replicated, and SNP density can be configured in the script itself. 
