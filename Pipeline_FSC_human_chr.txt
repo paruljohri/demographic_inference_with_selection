@@ -30,9 +30,9 @@ python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} ${DFE} ${
 
 
 #Step3: make SFS for varying SNP densities
-output_obs_all="MASTER_all_${demographic_model}_${exon_state}_${functional_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs"
-output_obs_thinned="MASTER_thinned_${demographic_model}_${exon_state}_${functional_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs"
-ratio_file="${any folder of your choosing}/ratio_file_${demographic_model}_${exon_state}_${functional_density}_sim${DFE}_rep${replicate_num}.txt"
+output_obs_all="MASTER_all_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs"
+output_obs_thinned="MASTER_thinned_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs"
+ratio_file="${any folder of your choosing}/ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt"
 python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${all_chromosomes} ${size} ${ratio_file} ${output_obs_all}
 python OtherScripts/SFS_maker_human_genome_segment_thinned_SNPs.py ${all_chromosomes} ${size} ${ratio_file} ${output_obs_thinned}
 
@@ -42,8 +42,8 @@ where ${all_chromosomes} is the input, with instances of "${path_to_.ms_files}/o
 #Possible inputs:
 #${DFE} = (0, 1, 2, 3, 4, 5, 6)
 #${demographic_model} - (eqm, growth, decline)
-#${functional_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
-#${exon_state} = (unmasked, masked)
+#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
+#${masking_state} = (unmasked, masked)
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
 #${size} = (The size of each chromosome in the genome in base pairs, which will vary depending on the functional density of the chromosome and whether or not its exons are masked. Below are the possible sizes.)
@@ -61,21 +61,18 @@ where ${all_chromosomes} is the input, with instances of "${path_to_.ms_files}/o
 
 
 #Step4: run fastsimcoal2
-fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}_${SNP_density}_${demographic_model}_${exon_state}_${functional_density}_sim${DFE}_rep${replicate_num}_trial${trial_num}.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/${tested_model}_${SNP_density}_${demographic_model}_${exon_state}_${functional_density}_sim${DFE}_rep${replicate_num}_trial${trial_num}.est -M -L 50 -q -T
+fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_trial${trial_num}.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/${tested_model}_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_trial${trial_num}.est -M -L 50 -q -T
 
 #Possible inputs:
 #${DFE} = (0, 1, 2, 3, 4, 5, 6)
 #${tested_model} = (eqm, size_change_exponential, size_change_inst, inst_bot)
 #${SNP_density} = (all, thinned)
 #${demographic_model} - (eqm, growth, decline)
-#${functional_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
-#${exon_state} = (unmasked, masked)
+#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
+#${masking_state} = (unmasked, masked)
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #${trial_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
 
 #Step5: plot results
 Use the "plot_msmc_and_fsc_results.py" script.  The scenario parameters, including the demographic model, functional density, DFE shape, SNP density, exon state, replicate number, and trial number, can be configured in the script itself. 
-
-
-
