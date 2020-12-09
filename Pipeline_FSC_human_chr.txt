@@ -33,11 +33,10 @@ python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} ${DFE} ${
 output_obs_all="MASTER_all_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs"
 output_obs_thinned="MASTER_thinned_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs"
 ratio_file="${any folder of your choosing}/ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt"
-python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${all_chromosomes} ${size} ${ratio_file} ${output_obs_all}
-python OtherScripts/SFS_maker_human_genome_segment_thinned_SNPs.py ${all_chromosomes} ${size} ${ratio_file} ${output_obs_thinned}
+python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${input_filenames} ${size} ${ratio_file} ${output_obs_all}
+python OtherScripts/SFS_maker_human_genome_segment_thinned_SNPs.py ${input_filenames} ${size} ${ratio_file} ${output_obs_thinned}
 
-where ${all_chromosomes} is the input, with instances of "${path_to_.ms_files}/output_genome${replicate_num}_chr${chromosome_num}${an addition of "_masked" when performing this on the masked versions of the .ms files}.ms for all 22 chromosomes in a genome combined into a single string, each seperated by a space. For example, this would look like...
-"${path_to_.ms_files}/output_genome1_chr1_masked ${path_to_.ms_files}/output_genome1_chr2_masked ... ${path_to_.ms_files}/output_genome1_chr21_masked ${path_to_.ms_files}/output_genome1_chr22_masked"
+where ${input_filenames} = "${path_to_.ms_files}/output_genome1_chr1_masked ${path_to_.ms_files}/output_genome1_chr2_masked ... ${path_to_.ms_files}/output_genome1_chr21_masked ${path_to_.ms_files}/output_genome1_chr22_masked" for all 22 chromosomes in the genome
 
 #Possible inputs:
 #${DFE} = (0, 1, 2, 3, 4, 5, 6)
@@ -75,4 +74,4 @@ fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}_${SNP_density}_${demographic_mo
 
 
 #Step5: plot results
-Use the "plot_msmc_and_fsc_results.py" script.  The scenario parameters, including the demographic model, functional density, DFE shape, SNP density, exon state, replicate number, and trial number, can be configured in the script itself. 
+Use the "plot_msmc_and_fsc_results.py" script.  The scenario parameters, including the demographic model, exon density, DFE shape, SNP density, masking state, replicate number, and trial number, can be configured in the script itself. 
