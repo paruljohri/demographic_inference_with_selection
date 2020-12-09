@@ -22,14 +22,15 @@ python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${rep
 
 
 #Step2: make SFS for varying SNP densities
-ratio_file="${any folder of your choosing}/ratio_file_${segment_size}_rep${replicate_num}.txt"
-python OtherScripts/SFS_maker_single_segment_all_SNPs.py ${path_to_ms_file} ${size} ${ratio_file} MASTER_all_${segment_size}_rep${replicate_num}_DAFpop0.obs #For including all  SNPs
-python OtherScripts/SFS_maker_single_segment_thinned_SNPs.py ${path_to_ms_file} ${size} ${ratio_file} MASTER_thinned_${segment_size}_rep${replicate_num}_DAFpop0.obs #For thinning SNPs and 
+
+python OtherScripts/SFS_maker_single_segment_all_SNPs.py ${path_to_ms_file} ${size} ratio_file_${segment_size}_rep${replicate_num}.txt MASTER_all_${segment_size}_rep${replicate_num}_DAFpop0.obs #For including all  SNPs
+python OtherScripts/SFS_maker_single_segment_thinned_SNPs.py ${path_to_ms_file} ${size} ratio_file_${segment_size}_rep${replicate_num}.txt MASTER_thinned_${segment_size}_rep${replicate_num}_DAFpop0.obs #For thinning SNPs
 
 #Possible inputs:
 #${segment_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
 #${size} = (size of segment in base pairs, i.e. 1Mb would be 1000000)
+#ratio_file_${segment_size}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking.
 
 
 
