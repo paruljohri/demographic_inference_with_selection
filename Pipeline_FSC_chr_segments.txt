@@ -22,11 +22,9 @@ python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${rep
 
 
 #Step2: make SFS for varying SNP densities
-output_obs_all="MASTER_all_${segment_size}_rep${replicate_num}_DAFpop0.obs"
-output_obs_thinned="MASTER_thinned_${segment_size}_rep${replicate_num}_DAFpop0.obs"
 ratio_file="${any folder of your choosing}/ratio_file_${segment_size}_rep${replicate_num}.txt"
-python OtherScripts/SFS_maker_single_segment_all_SNPs.py ${path_to_segment_ms_file} ${size} ${ratio_file} ${output_obs_all}
-python OtherScripts/fsc_kellen/scripts/SFS_maker_single_segment_thinned_SNPs.py ${path_to_segment_ms_file} ${size} ${ratio_file} ${output_obs_thinned}
+python OtherScripts/SFS_maker_single_segment_all_SNPs.py ${path_to_ms_file} ${size} ${ratio_file} MASTER_all_${segment_size}_rep${replicate_num}_DAFpop0.obs #For including all  SNPs
+python OtherScripts/SFS_maker_single_segment_thinned_SNPs.py ${path_to_ms_file} ${size} ${ratio_file} MASTER_thinned_${segment_size}_rep${replicate_num}_DAFpop0.obs #For thinning SNPs and 
 
 #Possible inputs:
 #${segment_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
@@ -36,7 +34,8 @@ python OtherScripts/fsc_kellen/scripts/SFS_maker_single_segment_thinned_SNPs.py 
 
 
 #Step3: run fastsimcoal2
-fsc26 -t Fastsimcoal2_InputFiles/${tested_model}_${SNP_density}_${segment_size}_rep${replicate_num}.tpl -n 150000 -d -e Fastsimcoal2_InputFiles/${tested_model}_${SNP_density}_${segment_size}_rep${replicate_num}.est -M -L 50 -q -T
+fsc26 -t Fastsimcoal2_InputFiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal2_InputFiles/${tested_model}.est -M -L 50 -q -T
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/XXXXXXXXXXXXXXXXXXXXXXXXX
 
 #Possible inputs:
 #${tested_model} = (eqm, size_change_exponential, size_change_inst, inst_bot)
