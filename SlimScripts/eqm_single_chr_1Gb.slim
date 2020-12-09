@@ -1,0 +1,22 @@
+//To run:
+//slim -d d_seed=seed -d "d_repID='replicate number'" -d "d_folder='/scratch/kriall/eqm_single_chr_10Mb'" eqm_single_chr_10Mb.slim
+
+initialize() {
+    setSeed(d_seed);
+    
+    initializeMutationRate(1e-8);
+    initializeMutationType("m1", 0.5, "f", 0.0);
+    initializeGenomicElementType("g1", m1, 1.0);
+    initializeGenomicElement(g1, 0, 999999999);
+    initializeRecombinationRate(1e-8);
+}
+1 {
+    sim.addSubpop("p1", 5000);
+}
+50000 late(){
+    p1.outputMSSample(100, F, "*", d_folder + "/output_single_chr_10Mb_rep" + d_repID + ".ms", F);
+    print(p1.individualCount);
+    
+}
+
+
