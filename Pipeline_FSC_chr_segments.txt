@@ -2,11 +2,11 @@
 #Updated on December 7, 2020
 
 #Step1: simulations in SliM
-slim -d d_seed=${seed} -d "d_repID='${replicate_num}'" -d "d_folder='output_foldername'" SlimScripts/eqm_single_chr_${segment_size}.slim
+slim -d d_seed=${seed} -d "d_repID='${replicate_num}'" -d "d_folder='output_foldername'" SlimScripts/eqm_single_chr_${chr_size}.slim
 
 #Possible inputs:
 #${seed} = (any random seed of your choosing)
-#${segment_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
 
 #Alt Step 1: simulations in Msprime:
@@ -23,8 +23,10 @@ python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${rep
 
 #Step2: make SFS for varying SNP densities
 
-python OtherScripts/SFS_maker_single_segment_all_SNPs.py ${path_to_ms_file} ${size} ratio_file_${segment_size}_rep${replicate_num}.txt MASTER_all_${segment_size}_rep${replicate_num}_DAFpop0.obs #For including all  SNPs
-python OtherScripts/SFS_maker_single_segment_thinned_SNPs.py ${path_to_ms_file} ${size} ratio_file_${segment_size}_rep${replicate_num}.txt MASTER_thinned_${segment_size}_rep${replicate_num}_DAFpop0.obs #For thinning SNPs
+python OtherScripts/SFS_maker_single_chr_all_SNPs.py ${path_to_ms_file} ${size} ratio_file_${chr_size}_rep${replicate_num}.txt MASTER_all_${chr_size}_rep${replicate_num}_DAFpop0.obs #For including all  SNPs
+python OtherScripts/SFS_maker_single_chr_thinned_5kb_SNPs.py  ${size} ratio_file_${chr_size}_rep${replicate_num}.txt MASTER_thinned_5kb_${chr_size}_rep${replicate_num}_DAFpop0.obs #For thinning SNPs to 1 in 5kb
+python OtherScripts/SFS_maker_single_chr_thinned_50kb_SNPs.py  ${size} ratio_file_${chr_size}_rep${replicate_num}.txt MASTER_thinned_50kb_${chr_size}_rep${replicate_num}_DAFpop0.obs #For thinning SNPs to 1 in 50kb
+python OtherScripts/SFS_maker_single_chr_thinned_100kb_SNPs.py  ${size} ratio_file_${chr_size}_rep${replicate_num}.txt MASTER_thinned_100kb_${chr_size}_rep${replicate_num}_DAFpop0.obs #For thinning SNPs to 1 in 100kb
 
 #Possible inputs:
 #${segment_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
@@ -36,15 +38,15 @@ python OtherScripts/SFS_maker_single_segment_thinned_SNPs.py ${path_to_ms_file} 
 
 #Step3: run fastsimcoal2
 fsc26 -t Fastsimcoal2_InputFiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal2_InputFiles/${tested_model}.est -M -L 50 -q -T
-#uses the SFS file Fastsimcoal2_Inputfiles_SFS/XXXXXXXXXXXXXXXXXXXXXXXXX
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${chr_size}_rep${replicate_num}_DAFpop0.obs
 
 #Possible inputs:
 #${tested_model} = (eqm, size_change_exponential, size_change_inst, inst_bot)
-#${SNP_density} = (all, thinned)
-#${segment_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${SNP_density} = (all, thinned_5kb, thinned_50kb, thinned_100kb)
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
 
 
 
 #Step4: plot results
-Use the "plot_msmc_and_fsc_results_single_segment.py" script.  The scenario parameters, including the segment size, number of replicated, and SNP density can be configured in the script itself. 
+Use the "plot_msmc_and_fsc_results_single_chr.py" script.  The scenario parameters, including the segment size, number of replicates, and SNP density can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate, then plot each of those models. Note that the script can be configured to plot the MSMC results, fastsimcoal2 results, or both.
