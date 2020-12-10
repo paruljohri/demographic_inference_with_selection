@@ -1,11 +1,12 @@
 1. I have deleted the folder called Plots.zip because we would have to update that if we want to keep it.\
 This is what we had there - ">>All plots of MSMC and fastsimcoal2 results where inference for MSMC was perfomed using a single diploid individual and for fastsimcoal2 was performed using 50 diploid individuals with SNPs spaced out by 5 kb."\
+can have if time
 
 2. What do we with the $ratio files?
 
-3. Do we modify commandlines for each Figure?
+3. Do we modify commandlines for each Figure? Yes.
 
-4. Upload MSMC_outputfiles
+4. Upload MSMC_outputfiles- what is  easiest.
 Folder structure or not? ~2,100 files
 genome20/genome10/genome05 -> eqm/decline_6fold/growth_30fold/decline_2fold/growth_2fold -> neutrality/dfe1/dfe2/dfe3/dfe4/dfe5/dfe6.zip (20 files in each folder)
 
@@ -19,5 +20,6 @@ genome20/genome10/genome05 -> eqm/decline_6fold/growth_30fold/decline_2fold/grow
 
 7. Add subsample file
 
+8. double check everything.
 
 
