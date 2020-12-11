@@ -32,10 +32,7 @@ python OtherScripts/SFS_maker_single_chr_thinned_SNPs.py output_single_chr_${chr
 #${chr_size_as_int} = (size of segment in base pairs, i.e. 1Mb would be 1000000)
 #${thinning_size_as_str} = (the desired distance between counted SNPs as a string, which for this project where 5kb, 50kb, and 100kb)
 #${thinning_size_as_int} = (the desired distance between counted SNPs in base pairs, so for a thinning of 5kb, type 5000)
-#output_single_chr_${chr_size_as_str}_rep${replicate_num}.ms -> The input .ms files to make the SFS from. The file name structure given is for .ms files made in SLiM.
 #ratio_file_${chr_size_as_str}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking.
-#MASTER_all_${chr_size_as_str}_rep${replicate_num}_DAFpop0.obs -> The SFS output file made using all SNPs.
-#MASTER_thinned_${thinning_size_as_str}_${chr_size_as_str}_rep${replicate_num}_DAFpop0.obs -> The SFS output file made using some thinned amount of SNPs
 
 
 
