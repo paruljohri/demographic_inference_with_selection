@@ -2,12 +2,13 @@
 #Updated on December 7, 2020
 
 #Step1: simulations in SliM
-slim -d d_seed=${seed} -d "d_repID='${replicate_num}'" -d "d_folder='output_foldername'" SlimScripts/eqm_single_chr_${segment_size}.slim
+slim -d d_seed=${seed} -d "d_repID='${replicate_num}'" -d "d_folder='${output_folder}'" SlimScripts/eqm_single_chr_${chr_size}.slim
 
 #Possible inputs:
 #${seed} = (any random seed of your choosing)
-#${segment_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+#${output_folder} = (folder that newly created .ms files will be output to)
 
 #Alt Step 1: simulations in Msprime:
 python MsprimeScripts/simulate_msprime.py eqm_neutral_10Mb_msp 10000000 1 ${replicate_num} ${seed}
@@ -22,34 +23,34 @@ python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${rep
 
 
 #Step2: Randomly sample N haplotypes from the 100 haplotypes present in an .ms file
-python OtherScripts/subsample_ms.py ${chromosomes_location}/output_single_chr_${segment_size}_rep${replicate_num}.ms ${folder of your choosing}/sampled_${segment_size}_${num_of_haplotypes}indv_rep${replicate_num}.ms ${num_of_haplotypes}
+python OtherScripts/subsample_ms.py output_single_chr_${chr_size}_rep${replicate_num}.ms sampled_${chr_size}_${num_of_haplotypes}indv_rep${replicate_num}.ms ${num_of_haplotypes}
 
 #Possible inputs:
-#${segment_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
-#${num_of_individuals} = (this may be any value greater than or equal to 2, though for the purposes of this study, only values of 2, 4, and 8 were tested)
+#${num_of_individuals} = (this may be any value greater than or equal to 2, though for the purposes of this project, only values of 2, 4, and 8 were tested)
 
 
 
 #Step3: make the input file (.tab format) for MSMC
-less ${folder of your choosing}/sampled_${segment_size}_${num_of_haplotypes}indv_rep${replicate_num}.ms |python OtherScripts/ms2multihetsep.py "sampled_${segment_size}_${num_of_haplotypes}indv_rep${replicate_num}.ms" $size > ${folder of your choosing}/converted_${segment_size}_${num_of_haplotypes}indv_rep${replicate_num}.tab
+less sampled_${chr_size_as_Str}_${num_of_haplotypes}indv_rep${replicate_num}.ms |python OtherScripts/ms2multihetsep.py "sampled_${chr_size_as_str}_${num_of_haplotypes}indv_rep${replicate_num}.ms" $chr_size_as_int > converted_${chr_size_as_str}_${num_of_haplotypes}indv_rep${replicate_num}.tab
 
 #Possible inputs:
-#${segment_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
 #${num_of_individuals} = (this may be any value greater than or equal to 2, though for the purposes of this study, only values of 2, 4, and 8 were tested)
-#$size = (size of segment in base pairs, i.e. 1Mb would be 1000000)
+#${chr_size_as_str} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#$chr_size_as_int = (size of segment in base pairs, i.e. 1Mb would be 1000000)
 
 
 
 #Step4: run MSMC
-msmc_1.1.0_linux64bit -r 1.0 -t 1 -o ${folder of your choosing}/raw_output_${segment_size}_${num_of_haplotypes}indv_rep${replicate_num} ${folder of your choosing}/converted_${segment_size}_${num_of_haplotypes}indv_rep${replicate_num}.tab
+msmc_1.1.0_linux64bit -r 1.0 -t 1 -o raw_output_${chr_size}_${num_of_haplotypes}indv_rep${replicate_num} converted_${chr_size}_${num_of_haplotypes}indv_rep${replicate_num}.tab
 
-#${segment_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
 #${num_of_individuals} = (this may be any value greater than or equal to 2, though for the purposes of this study, only values of 2, 4, and 8 were tested)
 
 
 
 #Step5: transform MSMC output files, average them and plot them
-Use the "plot_msmc_and_fsc_results_single_segment.py" script.  The scenario parameters, including the segment size, number of replicated, and SNP density can be configured in the script itself. 
+Use the "plot_msmc_single_segment.py" script.  The scenario parameters, including the segment size, number of replicated, and SNP density can be configured in the script itself. 
