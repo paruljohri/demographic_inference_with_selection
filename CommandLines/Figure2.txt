@@ -60,8 +60,8 @@
 
 
 #Step6: make SFS for varying SNP densities
-python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${input_filenames} 118424753 ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt MASTER_all_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
-python OtherScripts/SFS_maker_human_genome_thinned_SNPs.py ${input_filenames} 118424753 ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt MASTER_thinned_5kb_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs 5000
+>> python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${input_filenames} 118424753 ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt MASTER_all_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+>> python OtherScripts/SFS_maker_human_genome_thinned_SNPs.py ${input_filenames} 118424753 ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt MASTER_thinned_5kb_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs 5000
 
 where ${input_filenames} = "output_genome1_chr1_masked output_genome1_chr2_masked ... output_genome1_chr22_masked"
 
@@ -76,17 +76,16 @@ where ${input_filenames} = "output_genome1_chr1_masked output_genome1_chr2_maske
 
 #Step7: run fastsimcoal2
 >> fsc26 -t Fastsimcoal2_Inputfiles/eqm.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/eqm.est -M -L 50 -q -T
-#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_thinned_5kb_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
 >> fsc26 -t Fastsimcoal2_Inputfiles/size_change_exponential.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/size_change_exponential.est -M -L 50 -q -T
-#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_thinned_5kb_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
 >> fsc26 -t Fastsimcoal2_Inputfiles/size_change_inst.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/size_change_inst.est -M -L 50 -q -T
-#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_thinned_5kb_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
 >> fsc26 -t Fastsimcoal2_Inputfiles/inst_bot.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/inst_bot.est -M -L 50 -q -T
-#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_thinned_5kb_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
 
 #Possible inputs:
 #${DFE} = (5, 6)
-#${SNP_density} = (all, thinned_5kb)
 #${demographic_model} - (eqm, growth, decline)
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
