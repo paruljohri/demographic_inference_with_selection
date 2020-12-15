@@ -1,126 +1,96 @@
-#Command lines for Figure 1
-#Updated on December 14, 2020
+#Command lines for Figure 2
+#Updated on December 15, 2020
 
 #Step1: simulations in SliM
-slim -d d_seed=${seed} -d d_f0=100 -d d_f1=0 -d d_f2=0 -d d_f3=0 -d "d_simID='0'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/${demographic_model}_dfe_150Mb_22chr_scaled_${exon_density}.slim
-slim -d d_seed=${seed} -d d_f0=10 -d d_f1=70 -d d_f2=10 -d d_f3=10 -d "d_simID='1'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/${demographic_model}_dfe_150Mb_22chr_scaled_${exon_density}.slim
-slim -d d_seed=${seed} -d d_f0=10 -d d_f1=10 -d d_f2=70 -d d_f3=10 -d "d_simID='2'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/${demographic_model}_dfe_150Mb_22chr_scaled_${exon_density}.slim
-slim -d d_seed=${seed} -d d_f0=10 -d d_f1=10 -d d_f2=10 -d d_f3=70 -d "d_simID='3'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/${demographic_model}_dfe_150Mb_22chr_scaled_${exon_density}.slim
-slim -d d_seed=${seed} -d d_f0=25 -d d_f1=25 -d d_f2=25 -d d_f3=25 -d "d_simID='4'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/${demographic_model}_dfe_150Mb_22chr_scaled_${exon_density}.slim
-slim -d d_seed=${seed} -d d_f0=50 -d d_f1=0 -d d_f2=0 -d d_f3=50 -d "d_simID='5'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/${demographic_model}_dfe_150Mb_22chr_scaled_${exon_density}.slim
-slim -d d_seed=${seed} -d d_f0=70 -d d_f1=0 -d d_f2=0 -d d_f3=30 -d "d_simID='6'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/${demographic_model}_dfe_150Mb_22chr_scaled_${exon_density}.slim
+>> slim -d d_seed=${seed} -d d_f0=50 -d d_f1=0 -d d_f2=0 -d d_f3=50 -d "d_simID='5'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/${demographic_model}_dfe_150Mb_22chr_scaled_genome20.slim
+>> slim -d d_seed=${seed} -d d_f0=70 -d d_f1=0 -d d_f2=0 -d d_f3=30 -d "d_simID='6'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/${demographic_model}_dfe_150Mb_22chr_scaled_genome20.slim
 
 #Possible inputs:
-#${seed} = (any random seed of your choosing) = ${replicate_num} + ${chromosome_num}
+#${seed} = (any random seed of your choosing)
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
 #${demographic_model} - (eqm, growth, decline)
-#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
 #${output_folder} = (folder that newly created .ms files will be output to)
 
 
 
-
 #Step2: mask exonic regions:
-python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} ${DFE} ${replicate_num} ${chromosome_num}
+>> python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} sim5 ${replicate_num} ${chromosome_num}
+>> python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} sim6 ${replicate_num} ${chromosome_num}
 
 #Possible inputs:
-#${DFE} = (0, 1, 2, 3, 4, 5, 6)
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
+
+
 
 #Step3: Randomly sample N haplotypes from the 100 haplotypes present in an .ms file
-python OtherScripts/subsample_ms.py output_genome${replicate_num}_chr${chromosome_num}_${masking_state}.ms sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.ms 2
+>> python OtherScripts/subsample_ms.py output_genome${replicate_num}_chr${chromosome_num}_masked.ms sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim5_genome20_masked.ms 2
+>> python OtherScripts/subsample_ms.py output_genome${replicate_num}_chr${chromosome_num}_masked.ms sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim6_genome20_masked.ms 2
 
 #Possible inputs:
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
-#${DFE} = (0, 1, 2, 3, 4, 5, 6)
 #${demographic_model} = (eqm, growth, decline)
-#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
-#${masking_state} = (unmasked, masked)
 
 
 
 #Step4: make the input file (.tab format) for MSMC
-less sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.ms |python OtherScripts/ms2multihetsep.py "sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}" $size > converted_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab
+>> less sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim5_genome20_masked.ms |python ms2multihetsep.py "sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim5_genome20_masked" 150003700 > converted_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim5_genome20_masked.tab
+>> less sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim6_genome20_masked.ms |python ms2multihetsep.py "sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim6_genome20_masked" 150003700 > converted_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim6_genome20_masked.tab
 
 #ms2multihetsep.py was provided in the MSMC Tools folder (XXXXXXXXXlinkXXXXXXXXXXX)
 
 #Possible inputs:
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
-#${DFE} = (0, 1, 2, 3, 4, 5, 6)
 #${demographic_model} = (eqm, growth, decline)
-#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
-#${masking_state} = (unmasked, masked)
-#$size = (The size of each chromosome in the genome in base pairs, which will vary depending on the exon density of the chromosome. Below are the possible sizes.)
-
-#Possible sizes
-#genome05 = 150018600
-#genome10 = 150029950
-#genome20 = 150003700
 
 
 
 #Step5: run MSMC
-msmc_1.1.0_linux64bit -r 1.0 -t 1 -o raw_output_150Mb_2indv_genome${replicate_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state} ${input_filenames}
-
-where ${input_filenames} = converted_150Mb_2indv_genome${replicate_num}_chr1_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab converted_150Mb_2indv_genome${replicate_num}_chr2_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab ... converted_150Mb_2indv_genome${replicate_num}_chr21_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab converted_150Mb_2indv_genome${replicate_num}_chr22_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab for all 22 chromosomes in the genome
+>> msmc_1.1.0_linux64bit -r 1.0 -t 1 -o raw_output_150Mb_2indv_genome${replicate_num}_${demographic_model}_sim5_genome20_masked converted_150Mb_2indv_genome${replicate_num}_chr1_${demographic_model}_sim5_genome20_masked.tab converted_150Mb_2indv_genome${replicate_num}_chr2_${demographic_model}_sim5_genome20_masked.tab ... converted_150Mb_2indv_genome${replicate_num}_chr22_${demographic_model}_sim5_genome20_masked.tab
+>> msmc_1.1.0_linux64bit -r 1.0 -t 1 -o raw_output_150Mb_2indv_genome${replicate_num}_${demographic_model}_sim6_genome20_masked converted_150Mb_2indv_genome${replicate_num}_chr1_${demographic_model}_sim6_genome20_masked.tab converted_150Mb_2indv_genome${replicate_num}_chr2_${demographic_model}_sim6_genome20_masked.tab ... converted_150Mb_2indv_genome${replicate_num}_chr22_${demographic_model}_sim6_genome20_masked.tab
 
 #Possible inputs:
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
-#${DFE} = (0, 1, 2, 3, 4, 5, 6)
 #${demographic_model} = (eqm, growth, decline)
-#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
-#${masking_state} = (unmasked, masked)
 
 
 
 #Step6: make SFS for varying SNP densities
-python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${input_filenames} ${size} ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt MASTER_all_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
-python OtherScripts/SFS_maker_human_genome_thinned_SNPs.py ${input_filenames} ${size} ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt MASTER_thinned_${thinning_size_as_str}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs ${thinning_size_as_int}
+python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${input_filenames} 118424753 ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt MASTER_all_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+python OtherScripts/SFS_maker_human_genome_thinned_SNPs.py ${input_filenames} 118424753 ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt MASTER_thinned_5kb_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs 5000
 
-where ${input_filenames} = "output_genome1_chr1_${masking_state} output_genome1_chr2_${masking_state} ... output_genome1_chr21_${masking_state} output_genome1_chr22_${masking_state}" for all 22 chromosomes in the genome
+where ${input_filenames} = "output_genome1_chr1_masked output_genome1_chr2_masked ... output_genome1_chr22_masked"
 
 #Possible inputs:
-#${DFE} = (0, 1, 2, 3, 4, 5, 6)
+#${DFE} = (5, 6)
 #${demographic_model} - (eqm, growth, decline)
-#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
-#${masking_state} = (unmasked, masked)
-#${thinning_size_as_str} = (the desired distance between counted SNPs as a string, which for this project where 5kb, 50kb, and 100kb)
-#${thinning_size_as_int} = (the desired distance between counted SNPs in base pairs, so for a thinning of 5kb, type 5000)
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
-#${size} = (The size of each chromosome in the genome in base pairs, which will vary depending on the functional density of the chromosome and whether or not its exons are masked. Below are the possible sizes.)
-#ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking for each replicate separately. This file is an output of the script "SFS_maker_single_chr_all_SNPs.py" and used as an input file in the script "SFS_maker_single_chr_thinned_SNPs.py".
-
-#Possible sizes
-#When exons are not masked:
-#genome05 = 150018600
-#genome10 = 150029950
-#genome20 = 150003700
-#When exons are masked:
-#genome05 = 142354366
-#genome10 = 135572119
-#genome20 = 118424753
+#ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking for each replicate separately. This file is an output of the script "SFS_maker_single_chr_all_SNPs.py" and used as an input file in the script "SFS_maker_single_chr_thinned_SNPs.py".
 
 
 
 #Step7: run fastsimcoal2
-fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/${tested_model}.est -M -L 50 -q -T
-#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+>> fsc26 -t Fastsimcoal2_Inputfiles/eqm.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/eqm.est -M -L 50 -q -T
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+>> fsc26 -t Fastsimcoal2_Inputfiles/size_change_exponential.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/size_change_exponential.est -M -L 50 -q -T
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+>> fsc26 -t Fastsimcoal2_Inputfiles/size_change_inst.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/size_change_inst.est -M -L 50 -q -T
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+>> fsc26 -t Fastsimcoal2_Inputfiles/inst_bot.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/inst_bot.est -M -L 50 -q -T
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
 
 #Possible inputs:
-#${DFE} = (0, 1, 2, 3, 4, 5, 6)
-#${tested_model} = (eqm, size_change_exponential, size_change_inst, inst_bot)
+#${DFE} = (5, 6)
 #${SNP_density} = (all, thinned_5kb)
 #${demographic_model} - (eqm, growth, decline)
-#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
-#${masking_state} = (unmasked, masked)
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
 
 #Step8: plot results
 Use the "plot_msmc_and_fsc_results.py" script.  The scenario parameters, including the demographic model, exon density, DFE shape, SNP density, masking state, replicate number, and trial number, can be configured in the script itself. 
+
