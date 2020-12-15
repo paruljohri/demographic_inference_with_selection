@@ -25,7 +25,7 @@ def get_sfs(l_af):
             d_sfs[x] = d_sfs[x] + 1
         except:
             d_sfs[x] = 1
-        if int(x) > 0 and int(x) < int(num_indv):
+        if int(x) > 0 and int(x) < int(num_indv): #throws away all sites that are monomorphic
             s_tot += 1
     return(d_sfs, s_tot)
 
