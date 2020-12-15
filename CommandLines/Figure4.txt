@@ -1,0 +1,17 @@
+#Commandlines for Figure 4
+#Updated on Dec 15th, 2020
+
+>> python OtherScripts/get_pi_from_ms_chr22.py -demo ${demographic_model} -dfe sim${DFE} -rep ${replicate_num} -genome genome10 -burnin F
+#This script calculates pi for all 22 chromosomes and outputs one mean value.
+
+#where possible inputs:
+#${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+#${DFE} = (0, 1, 2, 3, 4, 5, 6)
+#${demographic_model} = (eqm, growth, decline)
+#-burnin = (T, F) #calculating pi at or after burn-in
+
+
+
+#Values of B were calculated as follows:
+# B = (pi from ${demographic_model}, $DFE, ${replicate_num}, genome10) / (pi from ${demographic_model}, sim0, ${replicate_num}, genome10)
+#mean and standard deviation was calculated between the 10 replicates for each $(demographic_model} and ${DFE} = (sim1, sim2, sim3, sim4, sim5, sim6)
