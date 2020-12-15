@@ -1,3 +1,18 @@
 #Command lines for Figure 5
 #Updated Dec 15th, 2020
 
+Step1: Get SFS of all 22 chromosomes for each replicate for every demographic model
+
+>> python OtherScripts/get_sfs_chr22.py -demo eqm -dfe ${DFE} -rep ${replicate_num} -num_indv 20
+>> python OtherScripts/get_sfs_chr22.py -demo growth -dfe ${DFE} -rep ${replicate_num} -num_indv 20
+>> python OtherScripts/get_sfs_chr22.py -demo decline -dfe ${DFE} -rep ${replicate_num} -num_indv 20
+
+#where possible inputs are:
+#${DFE} = (sim0, sim1, sim2, sim3, sim4, sim5, sim6}
+#${replicate_num} = (1, 2, ... 10)
+
+
+#Step 2: Summarize the SFS obtained above:
+python OtherScripts/summarize_sfs_chr22.py 20
+
+#Step 3: The mean and SE of each bin were plotted.
