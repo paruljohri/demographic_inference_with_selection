@@ -10,7 +10,7 @@
 #${demographic_model} = (eqm, growth, decline)
 #-burnin = (T, F) #calculating pi at or after burn-in
 
-
+>> python summarize_pi_chr22.py #summarizes all obtained values in a table easily readable by R
 
 #Values of B were calculated as follows:
 # B = (pi from ${demographic_model}, $DFE, ${replicate_num}, genome10) / (pi from ${demographic_model}, sim0, ${replicate_num}, genome10)
