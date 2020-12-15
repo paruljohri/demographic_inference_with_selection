@@ -17,7 +17,7 @@ python MsprimeScripts/simulate_msprime.py eqm_neutral_200Mb_msp 200000000 1 ${re
 python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${replicate_num} ${seed}
 
 #Possible inputs:
-#${seed} = (any random seed of your choosing)
+#${seed} = (any random seed of your choosing) = ${replicate_num}
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
 
 
