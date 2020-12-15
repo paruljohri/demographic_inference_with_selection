@@ -47,6 +47,7 @@ where ${input_filenames} = "output_genome1_chr1_${masking_state} output_genome1_
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 #${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
 #${size} = (The size of each chromosome in the genome in base pairs, which will vary depending on the functional density of the chromosome and whether or not its exons are masked. Below are the possible sizes.)
+#ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking for each replicate separately. This file is an output of the script "SFS_maker_single_chr_all_SNPs.py" and used as an input file in the script "SFS_maker_single_chr_thinned_SNPs.py".
 
 #Possible sizes
 #When exons are not masked:
