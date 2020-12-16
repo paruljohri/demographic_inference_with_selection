@@ -4,7 +4,7 @@ import itertools
 import numpy as np
 import matplotlib.pyplot as plt
 
-def demographic_model_parameters(demographic_model, genome_percentage):
+def demographic_model_parameters(demographic_model, genome_percentage): #for plotting the true demographic model
     true_generations = []
     true_population_sizes = []
     
@@ -235,7 +235,7 @@ def analyze_fsc_results(number_of_fsc_replicates, number_of_fsc_trials_per_repli
                 replicate_inst_bot_values.append(best_replicate_values)
         max_MaxEstLhoods.append(max(all_MaxEstLhoods))
 
-    AIC=[]
+    AIC=[] #For model selection
     for a in range(0, len(models)):
         AIC_value = 2 * number_of_parameters[a] - 2 * max_MaxEstLhoods[a] * math.log(10)
         AIC.append(AIC_value)
