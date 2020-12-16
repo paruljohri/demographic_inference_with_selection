@@ -8,7 +8,14 @@
 
 
 #Step 1b: Simulations with selection
+>> python write_slim_scripts_SingExon_osg.py -numRep 10 -simID ${simID}
+#uses the script ABCScripts/demo_disc_5_SingExon_osg.slim
+
 #Step 1c: Simulations of the test set (to test performance)
+>> python ABCScripts/write_slim_scripts_SingExon_msmc.py -folder demo_disc_5_SingExon_testset -numRep 10 -simID ${simID}
+#uses the script ABCScripts/demo_disc_5_SingExon_msmc_testset.slim
+
+
 
 #Step 2: Calculating statistics:
 #Step 2a: Calculating statistics under neutrality
