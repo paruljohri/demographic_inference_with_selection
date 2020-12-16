@@ -1,0 +1,47 @@
+#General workflow for simulating chromosomal segments of varying sizes under neutral equilibrium and inferring demography using MSMC 
+#Updated on December 15, 2020
+
+#Step1: simulations in msprime 0.7.3
+>> python MsprimeScripts/simulate_msprime.py eqm_neutral_10Mb_msp 10000000 1 ${replicate_num} ${seed}
+>> python MsprimeScripts/simulate_msprime.py eqm_neutral_50Mb_msp 50000000 1 ${replicate_num} ${seed}
+>> python MsprimeScripts/simulate_msprime.py eqm_neutral_200Mb_msp 200000000 1 ${replicate_num} ${seed}
+>> python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${replicate_num} ${seed}
+
+#Possible inputs:
+#${seed} = (any random seed of your choosing) = ${replicate_num}
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+
+
+
+#Step2: Randomly sample N haplotypes from the 100 haplotypes present in an .ms file
+>> python OtherScripts/subsample_ms.py output_single_chr_${chr_size}_rep${replicate_num}.ms sampled_${chr_size}_${num_of_haplotypes}indv_rep${replicate_num}.ms ${num_of_haplotypes}
+
+#Possible inputs:
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+#${num_of_individuals} = (this may be any value greater than or equal to 2, though for the purposes of this project, only values of 2, 4, and 8 were tested)
+
+
+
+#Step3: make the input file (.tab format) for MSMC
+>> less sampled_${chr_size_as_Str}_${num_of_haplotypes}indv_rep${replicate_num}.ms |python ms2multihetsep.py "sampled_${chr_size_as_str}_${num_of_haplotypes}indv_rep${replicate_num}.ms" $chr_size_as_int > converted_${chr_size_as_str}_${num_of_haplotypes}indv_rep${replicate_num}.tab
+
+#Possible inputs:
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+#${num_of_individuals} = (this may be any value greater than or equal to 2, though for the purposes of this study, only values of 2, 4, and 8 were tested)
+#${chr_size_as_str} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#$chr_size_as_int = (size of segment in base pairs, i.e. 1Mb would be 1000000)
+
+
+
+#Step4: run MSMC
+>> msmc_1.1.0_linux64bit -r 1.0 -t 1 -o raw_output_${chr_size}_${num_of_haplotypes}indv_rep${replicate_num} converted_${chr_size}_${num_of_haplotypes}indv_rep${replicate_num}.tab
+
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+#${num_of_individuals} = (this may be any value greater than or equal to 2, though for the purposes of this study, only values of 2, 4, and 8 were tested)
+
+
+
+#Step5: transform MSMC output files, average them and plot them
+Use the "plot_msmc_single_segment.py" script.  The scenario parameters, including the segment size, number of replicated, and SNP density can be configured in the script itself. 
