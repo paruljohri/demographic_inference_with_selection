@@ -19,9 +19,26 @@
 
 #Step 2: Calculating statistics:
 #Step 2a: Calculating statistics under neutrality
+>> python ABCScripts/statistics_bigwindow_pylibseq_SingExon_msmc.py -LinkCutoff numbp50 -folder demo_neutral_SingExon_msmc -noncodingLen 4000 -numRep 10 -simID ${simID}
+>> python ABCScripts/get_final_statistics_SingExon.py $simulationID numbp50 demo_neutral_SingExon_stats
+
 #Step 2b: Calculating statistics with selection
+>> python ABCScripts/statistics_slidingwindow_pylibseq_SingExon_osg.py -folder demo_disc_5_SingExon_osg -winSize 200 -stepSize 200 -noncodingLen 4000 -simID $simulationID
+>> Rscript ./ABCScripts/get_pirecovery_statistics.R $simulationID 200 demo_disc_5_SingExon_osg_stats 4000 2000
+>> python ABCScripts/statistics_bigwindow_pylibseq_SingExon_osg.py -LinkCutoff numbp50 -folder demo_disc_5_SingExon_osg -simID $simulationID -noncodingLen 4000 -numRep 10
+>> python ABCScripts/get_final_statistics_SingExon.py $simulationID numbp50 demo_disc_5_SingExon_osg_stats
+
 #Step 2c: Calculating statistics of the test set (to test performance)
+>> python ABCScripts/statistics_bigwindow_pylibseq_SingExon_msmc.py -LinkCutoff numbp50 -folder demo_disc_5_SingExon_testset -simID $simulationID -noncodingLen 4000 -numRep 10
+>> python ABCScripts/get_final_statistics_SingExon.py $simulationID numbp50 demo_disc_5_SingExon_testset_stats
+
+
 
 #Step 3: Summarize all statistics in one table
+>> python ABCScripts/make_table_statistics_SingExon_50.py demo_neutral_SingExon_stats 100
+>> python ABCScripts/make_table_statistics_SingExon_50.py demo_disc_5_SingExon_testset_stats 100
+>> python ABCScripts/make_table_statistics_SingExon_osg.py demo_disc_5_SingExon_osg_stats 3543
 
-#Perform and plot ABC
+
+#Step 4: Perform and plot ABC
+Specific commandlines provided in: ABCScripts/abc_plot.R
