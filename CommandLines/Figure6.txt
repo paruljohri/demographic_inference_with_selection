@@ -1,3 +1,20 @@
 #Commandlines for Figure 6
 #Updated on Dec 15, 2020
 
+#Step 1: Simulations
+#Step 1a: Simulations under neutrality
+>> python ABCScripts/write_slim_scripts_SingExon_msmc.py -folder demo_neutral_SingExon -numRep 10 -simID ${simID}
+#uses the script ABCScripts/demo_neutral_SingExon_msmc.slim
+
+
+#Step 1b: Simulations with selection
+#Step 1c: Simulations of the test set (to test performance)
+
+#Step 2: Calculating statistics:
+#Step 2a: Calculating statistics under neutrality
+#Step 2b: Calculating statistics with selection
+#Step 2c: Calculating statistics of the test set (to test performance)
+
+#Step 3: Summarize all statistics in one table
+
+#Perform and plot ABC
