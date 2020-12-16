@@ -1,5 +1,5 @@
 //To run:
-//slim -d d_seed=seed -d "d_repID='replicate number'" -d "d_folder='/scratch/kriall/eqm_single_chr_10Mb'" eqm_single_chr_10Mb.slim
+//slim -d d_seed=seed -d "d_repID='replicate number'" -d "d_folder='eqm_single_chr_1Mb'" eqm_single_chr_1Mb.slim
 
 initialize() {
     setSeed(d_seed);
@@ -14,7 +14,7 @@ initialize() {
     sim.addSubpop("p1", 5000);
 }
 50000 late(){
-    p1.outputMSSample(100, F, "*", d_folder + "/output_single_chr_10Mb_rep" + d_repID + ".ms", F);
+    p1.outputMSSample(100, F, "*", d_folder + "/output_single_chr_1Mb_rep" + d_repID + ".ms", F);
     print(p1.individualCount);
     
 }
