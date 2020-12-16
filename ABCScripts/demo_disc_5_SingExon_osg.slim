@@ -1,0 +1,55 @@
+// Ne = 5000, which will be kept constant. Na and Nc will be chosen from a file. Burn-in for 10*Na generations. Then for 3Ne = 15,000 generations population size will be Na. Then for 1Ne = 5,000 generations, there will be exponential increase/ decrease to Nc.
+//4-fold pi = 0.019
+//real Ne = 1.6 x 10^6, mu = 3 x 10-9, rec = rec_rate * 0.5 * 10^-8, 2Nes = [0, -1, -10, -100, -10000], s = [0.0, -0.0001, -0.001, -0.01, -1]
+//scaling factor = 320
+//scaled Ne = 5000, scaled mu = 9.6e-07, rec = rec_rate * 1.6 x 10^-6
+//This is a discrete DFE model with 4 bins
+//Demographic changes will be exponential, read from a file.
+initialize()
+{
+    
+    // set the overall mutation rate
+    initializeMutationRate(9.6*1e-7);
+    
+    // mutation types: 
+    initializeMutationType("m1", 0.5, "f", 0.0); //neutral, s = 0
+    initializeMutationType("m2", 0.5, "s", "return runif(1, -0.001, -0.0001);"); //weakly deleterious, 1<2Nes<20, uniform distribution
+    initializeMutationType("m3", 0.5, "s", "return runif(1, -0.01, -0.001);"); //moderately deleterious, 1<2Nes<10, uniform distribution
+    initializeMutationType("m4", 0.5, "s", "return runif(1, -0.1, -0.01);"); //strongly deleterious, -1<2Nes<-100, uniform distribution
+        
+    
+    // g1 genomic element type: uses m1 for all mutations
+    initializeGenomicElementType("g1", m1, 1.0); //intergenic
+    initializeGenomicElementType("g2", c(m1, m2, m3, m4), c(f0, f1, f2, f3)); //functional: weakly deleterious, gamma
+    
+    //chromosome with a single functional element on one side
+    initializeGenomicElement(g1, 0, 3999);
+    initializeGenomicElement(g2, 4000, end_exon_size);
+    
+    // uniform recombination along the chromosome
+    initializeRecombinationRate(rec_rate*1.6*1e-6);
+}
+
+// part 2 (burn-in for gen_burnin generations): create a population of N_anc individuals
+1
+{
+    sim.addSubpop("p1", N_anc);
+}
+// part 3: equilibrium part    
+gen_burnin: {                                                                   
+    newSize = N_anc;            
+    p1.setSubpopulationSize(asInteger(newSize));                                
+}
+// part 4: exponential size change for 5,000 generations: reaches size N_cur
+gen_eqm: {
+    newSize = round(g_factor^(sim.generation - gen_eqm) * N_anc);
+    p1.setSubpopulationSize(asInteger(newSize));
+}
+//print genotypes of 100 individuals selected randomly without replacement:
+gen_stop late()
+{
+    p1.outputMSSample(100, F, "*", "/scratch/pjohri1/demo_disc_5_SingExon_osg/simID/simID_geneID_repID.ms", F);
+}
+//print all fixed mutations
+gen_stop late(){sim.outputFixedMutations("/scratch/pjohri1/demo_disc_5_SingExon_osg/simID/simID_geneID_repID.fixed", append=F);}
+gen_stop { }
