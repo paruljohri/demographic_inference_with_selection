@@ -19,7 +19,7 @@ demo = args.demo[0]
 dfe = args.dfe[0] 
 rep = args.rep[0]
 num_indv = args.num_indv[0]
-number_of_chromosomes = args.number_of_chromosomes[0]
+number_of_chromosomes = int(args.number_of_chromosomes[0])
 
 def get_sfs(l_af):
     d_sfs = {}
