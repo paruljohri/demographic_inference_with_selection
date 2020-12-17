@@ -1,1 +1,90 @@
-#All scripts for recombination and mutn rate variation
+### FINISH!!! ###
+#General workflow for simulating human-like chromosomes using SliM and inferring demography using MSMC 
+#Updated on December 7, 2020
+
+#Step1: simulations in SliM
+slim -d d_seed=${seed} -d d_f0=100 -d d_f1=0 -d d_f2=0 -d d_f3=0 -d "d_simID='0'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/recombination+mutation_script_${demographic_model}_${exon_density}_chr6.slim
+slim -d d_seed=${seed} -d d_f0=25 -d d_f1=25 -d d_f2=25 -d d_f3=25 -d "d_simID='4'" -d "d_repID='${replicate_num}'" -d "d_chrNum='${chromosome_num}'" -d "d_folder='${output_folder}'" SlimScripts/ecombination+mutation_script_${demographic_model}_${exon_density}_chr6.slim
+
+
+
+
+#Possible inputs:
+#${seed} = (any random seed of your choosing)
+#${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+#${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
+#${demographic_model} = (eqm, growth, decline)
+#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
+#${output_folder} = (folder that newly created .ms files will be output to)
+
+
+
+#Step2: mask exonic regions:
+python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} ${DFE} ${replicate_num} ${chromosome_num}
+
+#Possible inputs:
+#${DFE} = (0, 1, 2, 3, 4, 5, 6)
+#${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+#${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
+
+#Step2: mask additional regions:
+python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} ${DFE} ${replicate_num} ${chromosome_num}
+
+#Possible inputs:
+#${DFE} = (0, 1, 2, 3, 4, 5, 6)
+#${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+#${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
+
+
+
+#Step3: Randomly sample N haplotypes from the 100 haplotypes present in an .ms file
+python OtherScripts/subsample_ms.py output_genome${replicate_num}_chr${chromosome_num}_${masking_state}.ms sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.ms 2
+
+#Possible inputs:
+#${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+#${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
+#${DFE} = (0, 1, 2, 3, 4, 5, 6)
+#${demographic_model} = (eqm, growth, decline)
+#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
+#${masking_state} = (unmasked, masked)
+
+
+
+#Step4: make the input file (.tab format) for MSMC
+less sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.ms |python ms2multihetsep.py "sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}" $size > converted_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab
+
+#ms2multihetsep.py was provided in the MSMC Tools folder (XXXXXXXXXlinkXXXXXXXXXXX)
+
+#Possible inputs:
+#${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+#${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
+#${DFE} = (0, 1, 2, 3, 4, 5, 6)
+#${demographic_model} = (eqm, growth, decline)
+#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
+#${masking_state} = (unmasked, masked)
+#$size = (The size of each chromosome in the genome in base pairs, which will vary depending on the exon density of the chromosome. Below are the possible sizes.)
+
+#Possible sizes
+#genome05 = 150018600
+#genome10 = 150029950
+#genome20 = 150003700
+
+
+
+#Step5: run MSMC
+msmc_1.1.0_linux64bit -r 1.0 -t 1 -o raw_output_150Mb_2indv_genome${replicate_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state} ${input_filenames}
+
+where ${input_filenames} = converted_150Mb_2indv_genome${replicate_num}_chr1_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab converted_150Mb_2indv_genome${replicate_num}_chr2_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab ... converted_150Mb_2indv_genome${replicate_num}_chr21_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab converted_150Mb_2indv_genome${replicate_num}_chr22_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab for all 22 chromosomes in the genome
+
+#Possible inputs:
+#${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+#${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
+#${DFE} = (0, 1, 2, 3, 4, 5, 6)
+#${demographic_model} = (eqm, growth, decline)
+#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
+#${masking_state} = (unmasked, masked)
+
+
+
+#Step6: transform MSMC output files, average them and plot them
+Use the "plot_msmc_and_fsc_results.py" script.  The scenario parameters, including the demographic model, exon density, DFE shape, masking state, and replicate number can be configured in the script itself.
