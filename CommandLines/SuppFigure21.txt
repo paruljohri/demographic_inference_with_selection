@@ -1,1 +1,23 @@
-Add recombination ABC command lines
+#Commandlines for Supp Figure 21
+#Updated on Dec 17, 2020
+
+#Step 1: Test simulations for higher and lower recombination rates:
+>> python ABCScripts/write_slim_scripts_SingExon_msmc.py -folder demo_disc_5_SingExon_msmc_recombination -numRep 10 -simID ${simID}
+#uses the script ABCScripts/demo_disc_5_SingExon_msmc_recombination_high.slim
+#and uses the script ABCScripts/demo_disc_5_SingExon_msmc_recombination_low.slim
+
+
+
+#Step 2: Calculating statistics of the test set with 2-fold higher and lower recombination rates
+>> python ABCScripts/statistics_bigwindow_pylibseq_SingExon_msmc.py -LinkCutoff numbp50 -folder demo_disc_5_SingExon_msmc_recombination -simID $simulationID -noncodingLen 4000 -numRep 10
+>> python ABCScripts/get_final_statistics_SingExon.py $simulationID numbp50 demo_disc_5_SingExon_msmc_recombination_stats
+
+
+
+#Step 3: Summarize all statistics in one table
+>> python ABCScripts/make_table_statistics_SingExon_50.py demo_disc_5_SingExon_msmc_recombination_stats 6
+
+
+
+#Step 4: Perform and plot ABC
+Specific commandlines provided in: ABCScripts/abc_plot_recombination.r
