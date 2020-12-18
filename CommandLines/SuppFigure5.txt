@@ -62,7 +62,7 @@ where ${input_filenames} = "output_genome1_chr1_masked output_genome1_chr2_maske
 
 #Step4: run fastsimcoal2
 fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/${tested_model}.est -M -L 50 -q -T
-#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_masked_${exon_density}_${fold_change}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_thinned_5kb_${demographic_model}_masked_${exon_density}_${fold_change}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
 
 #Possible inputs:
 #${DFE} = (0, 1, 2, 3, 4, 5, 6)
@@ -75,4 +75,3 @@ fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal
 
 #Step5: plot results
 Use the "AIC_model_choice_human_genome.py" script. The scenario parameters, including the demographic model, exon density, DFE shape, SNP density, masking state, replicate number, and trial number, can be configured in the script itself. The script will perform an AIC calculation, the penalty of which can be configured, to determine which model is best for each replicate and output the average parameter values for each model.
-
