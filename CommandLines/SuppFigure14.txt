@@ -1,1 +1,1 @@
-One can use the "repeat_length_analyis.py" scrpt located in OtherScripts to reproduce this figure. The file containing the repeat length information, "hg19_Repeatmasker_UCSC.gff" is located at:
+One can use the "repeat_length_analyis.py" script located in OtherScripts to reproduce this figure. The file containing the repeat length information, "hg19_Repeatmasker_UCSC.gff" is located at:
