@@ -72,4 +72,4 @@ fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal
 
 
 #Step5: plot results
-Use the "AIC_model_choice_human_genome.py" script. The scenario parameters, including the demographic model, exon density, DFE shape, SNP density, masking state, replicate number, and trial number, can be configured in the script itself. The script will perform an AIC calculation, the penalty of which can be configured to be "2 x number of parameters", to determine which model is best for each replicate and output the average parameter values for each model.
+Use the "AIC_model_choice_human_genome.py" script. The scenario parameters, including the demographic model, exon density, DFE shape, SNP density, masking state, replicate number, and trial number, can be configured in the script itself. The script will perform an AIC calculation, the penalty of which can be configured to be "2 x number of parameters", to determine which model is best for each replicate.
