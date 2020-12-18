@@ -1,4 +1,4 @@
-#General workflow for simulating human-like chromosomes using SliM and inferring demography using fastsimcoal2 
+#Simulating human-like chromosomes using SliM and inferring demography using fastsimcoal2 
 #Updated on December 7, 2020
 
 #Step1: simulations in SliM
