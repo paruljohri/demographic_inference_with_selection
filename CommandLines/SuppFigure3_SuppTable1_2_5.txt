@@ -1,3 +1,4 @@
+#Command lines for generating Supp Figure 3 and Supp Table1, 2 and 5
 #FSC with simulations in SliM for simulating chromosomal segments of varying sizes under neutral equilibrium and inferring demography using FSC
 #Updated on December 17, 2020
 
