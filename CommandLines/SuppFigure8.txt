@@ -1,4 +1,5 @@
-#General workflow for simulating human-like chromosomes using SliM and inferring demography using MSMC 
+#Command lines for generating Supp Figure 8
+#MSMC and FSC for 2-fold growth/decline simulated in SliM 3.1
 #Updated on December 7, 2020
 
 #Step1: simulations in SliM
