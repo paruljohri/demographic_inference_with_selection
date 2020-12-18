@@ -42,5 +42,9 @@
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
 
 
-#Step4: plot results
-Use the "plot_fsc_results_single_chr.py" script.  The scenario parameters, including the segment size, number of replicates, and SNP density can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate, then plot the estimated size history using those model parameters.
+#Step4: 
+#plot results for Supp. Fig. 3:
+Use the "plot_fsc_results_single_chr.py" script. The scenario parameters, including the segment size, number of replicates, SNP density, and specification of results from genomes made in msprime can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate, then plot the estimated size history using those model parameters.
+
+#perform AIC model choice analysis for Supp. Table 1, Supp. Table 2, and Supp. Table 5:
+Use the "AIC_model_choice_chr_segments.py" script. The scenario parameters, including the segment size, number of replicates, SNP density, and specification of results from genomes made in msprime can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate and output the average parameter values for each model.
