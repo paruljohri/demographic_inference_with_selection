@@ -1,1 +1,37 @@
+#Command lines to generate Supp Table 4:
+#Updated on Dec 18, 2020
 
+#Step 1: Generate unlinked SNPs from 100 replicates:
+>> python create_ms_from_diff_chromosomes.py -regionLen 1000000 -chr_size 1Mb
+>> python create_ms_from_diff_chromosomes.py -regionLen 10000000 -chr_size 10Mb
+>> python create_ms_from_diff_chromosomes.py -regionLen 50000000 -chr_size 50Mb
+>> python create_ms_from_diff_chromosomes.py -regionLen 200000000 -chr_size 200Mb
+>> python create_ms_from_diff_chromosomes.py -regionLen 1000000000 -chr_size 1Gb
+
+
+
+#Step 2: Get r-square for unlinked SNPs:
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 100000 -stepSize 100000 -regionLen 1000000 -input_folder 1Mb_unlinked -filename draw${repID}.ms -output_folder 1Mb_unlinked
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 1000000 -stepSize 1000000 -regionLen 10000000 -input_folder 10Mb_unlinked -filename draw${repID}.ms -output_folder 10Mb_unlinked
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 5000000 -stepSize 5000000 -regionLen 50000000 -input_folder 50Mb_unlinked -filename draw${repID}.ms -output_folder 50Mb_unlinked
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 20000000 -stepSize 20000000 -regionLen 200000000 -input_folder 200Mb_unlinked -filename draw${repID}.ms -output_folder 200Mb_unlinked
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 100000000 -stepSize 100000000 -regionLen 1000000000 -input_folder 1Gb_unlinked -filename draw${repID}.ms -output_folder 1Gb_unlinked
+
+#where possible inputs are:
+#${repID} = (1, 2,...100)
+
+
+
+#Step 3: Get r-square for linked but SNPs thinned to varying densisties:
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 10000 -stepSize 10000 -regionLen ${chr_len} -input_folder ${chr_size} -filename output_single_chr_${chr_size}_rep${repID}.ms -output_folder ${chr_size}
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 50000 -stepSize 50000 -regionLen ${chr_len} -input_folder ${chr_size} -filename output_single_chr_${chr_size}_rep${repID}_thinned_5kb.ms -output_folder ${chr_size}
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 500000 -stepSize 500000 -regionLen ${chr_len} -input_folder ${chr_size} -filename output_single_chr_${chr_size}_rep${repID}_thinned_50kb.ms -output_folder ${chr_size}
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 1000000 -stepSize 1000000 -regionLen ${chr_len} -input_folder ${chr_size} -filename output_single_chr_${chr_size}_rep${repID}_thinned_100kb.ms -output_folder ${chr_size}
+
+#where possible inputs are:
+#${repID} = (1, 2,...100)
+#${chr_len} = (1000000 / 10000000 / 50000000 / 200000000 / 1000000000)
+#${chr_size} = (1Mb / 10Mb / 50Mb / 200Mb / 1Gb) respectively
+
+#Step 4: Summarize the r-square from replicates:
+>> python OtherScripts/summarize_LD_stats.py #can internally change parameters like chromosome size
