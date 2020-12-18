@@ -1,4 +1,4 @@
-#General workflow for simulating chromosomal segments of varying sizes under neutral equilibrium and inferring demography using MSMC 
+#Command lines for generating Supp Figure 1
 #Updated on December 15, 2020
 
 #Step1: simulations in SliM
