@@ -1,4 +1,5 @@
 #Command lines for Supp Figure 9
+#MSMC and FSC run on genomes with exons under direct selection, simulated using SLiM 3.1
 #Updated on December 17, 2020
 
 #Step1: simulations in SliM
