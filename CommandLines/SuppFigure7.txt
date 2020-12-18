@@ -1,1 +1,1 @@
-#Just add the command line for how you decided it was growth/ decline
+Use the "AIC_model_choice_human_genome.py" script. The scenario parameters, including the demographic model, exon density, DFE shape, SNP density, masking state, replicate number, and trial number, can be configured in the script itself. The script will perform an AIC calculation, the penalty of which can be configured to "2 x number of parameters", to determine which model is best for each replicate as well as whether or not growth or decline was inferred.
