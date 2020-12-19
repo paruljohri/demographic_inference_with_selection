@@ -2,11 +2,14 @@
 #Updated on Dec 18, 2020
 
 #Step 1: Generate unlinked SNPs from 100 replicates:
->> python create_ms_from_diff_chromosomes.py -regionLen 1000000 -chr_size 1Mb
->> python create_ms_from_diff_chromosomes.py -regionLen 10000000 -chr_size 10Mb
->> python create_ms_from_diff_chromosomes.py -regionLen 50000000 -chr_size 50Mb
->> python create_ms_from_diff_chromosomes.py -regionLen 200000000 -chr_size 200Mb
->> python create_ms_from_diff_chromosomes.py -regionLen 1000000000 -chr_size 1Gb
+>> python create_ms_from_diff_chromosomes.py -regionLen 1000000 -chr_size 1Mb -thinning ${SNP_density}
+>> python create_ms_from_diff_chromosomes.py -regionLen 10000000 -chr_size 10Mb -thinning ${SNP_density}
+>> python create_ms_from_diff_chromosomes.py -regionLen 50000000 -chr_size 50Mb -thinning ${SNP_density}
+>> python create_ms_from_diff_chromosomes.py -regionLen 200000000 -chr_size 200Mb -thinning ${SNP_density}
+>> python create_ms_from_diff_chromosomes.py -regionLen 1000000000 -chr_size 1Gb -thinning ${SNP_density}
+
+#where
+#${SNP_density} = (all/5kb/50kb/100kb)
 
 
 
@@ -15,7 +18,7 @@
 >> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 1000000 -stepSize 1000000 -regionLen 10000000 -input_folder 10Mb_unlinked -filename draw${repID}.ms -output_folder 10Mb_unlinked
 >> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 5000000 -stepSize 5000000 -regionLen 50000000 -input_folder 50Mb_unlinked -filename draw${repID}.ms -output_folder 50Mb_unlinked
 >> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 20000000 -stepSize 20000000 -regionLen 200000000 -input_folder 200Mb_unlinked -filename draw${repID}.ms -output_folder 200Mb_unlinked
->> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 100000000 -stepSize 100000000 -regionLen 1000000000 -input_folder 1Gb_unlinked -filename draw${repID}.ms -output_folder 1Gb_unlinked
+>> python OtherScripts/statistics_slidingwindow_pylibseq_general_1rep.py -winSize 1000000000 -stepSize 1000000000 -regionLen 1000000000 -input_folder 1Gb_unlinked -filename draw${repID}.ms -output_folder 1Gb_unlinked
 
 #where possible inputs are:
 #${repID} = (1, 2,...100)
@@ -34,4 +37,9 @@
 #${chr_size} = (1Mb / 10Mb / 50Mb / 200Mb / 1Gb) respectively
 
 #Step 4: Summarize the r-square from replicates:
->> python OtherScripts/summarize_LD_stats.py #can internally change parameters like chromosome size
+>> python OtherScripts/summarize_LD_stats.py ${chr_size} ${linkage_status} ${thinning}
+
+#where
+#${chr_size} = (1Mb / 10Mb / 50Mb / 200Mb / 1Gb)
+#${linkage_status} = (unlinked / linked)
+#${thinning} = (all / 5kb / 50kb / 100kb)
