@@ -46,7 +46,7 @@ python OtherScripts/subsample_ms.py output_genome${replicate_num}_chr${chromosom
 #Step4: make the input file (.tab format) for MSMC
 less sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.ms |python ms2multihetsep.py "sampled_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}" $size > converted_150Mb_2indv_genome${replicate_num}_chr${chromosome_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.tab
 
-#ms2multihetsep.py was provided in the MSMC Tools folder (XXXXXXXXXlinkXXXXXXXXXXX)
+#ms2multihetsep.py was provided in the MSMC Tools folder (https://github.com/stschiff/msmc-tools/blob/master/ms2multihetsep.py)
 
 #Possible inputs:
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
