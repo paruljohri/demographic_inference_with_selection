@@ -46,7 +46,7 @@ fsc26 -t Fastsimcoal2_InputFiles/inst_bot.tpl -n 150000 -d -e Fastsimcoal2_Input
 
 
 #Step 4:
-#perform AIC model choice analysis for Supp. Table 1, Supp. Table 2, and Supp. Table 5:
+#perform AIC model choice analysis for Supp. Table 2 and Supp. Table 5:
 #Use the "AIC_model_choice_chr_segments.py" script. The scenario parameters, including the segment size, number of replicates, SNP density, and specification of results from genomes made in SLiM can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate and output the average parameter values for each model.
 
 
