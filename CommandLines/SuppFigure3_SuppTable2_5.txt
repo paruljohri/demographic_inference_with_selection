@@ -1,4 +1,4 @@
-#Command lines for generating Supp Figure 3 and Supp Table1, 2 and 5
+#Command lines for generating Supp Figure 3 and Supp Table 2 and 5
 #FSC with simulations in SliM for simulating chromosomal segments of varying sizes under neutral equilibrium and inferring demography using FSC
 #Updated on December 17, 2020
 
@@ -44,9 +44,15 @@ fsc26 -t Fastsimcoal2_InputFiles/inst_bot.tpl -n 150000 -d -e Fastsimcoal2_Input
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
 
 
-#Step4: 
-#plot results for Supp. Fig. 3:
-Use the "plot_fsc_results_single_chr.py" script. The scenario parameters, including the segment size, number of replicates, SNP density, and specification of results from genomes made in SLiM can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate, then plot the estimated size history using those model parameters.
 
+#Step 4:
 #perform AIC model choice analysis for Supp. Table 1, Supp. Table 2, and Supp. Table 5:
-Use the "AIC_model_choice_chr_segments.py" script. The scenario parameters, including the segment size, number of replicates, SNP density, and specification of results from genomes made in SLiM can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate and output the average parameter values for each model.
+#Use the "AIC_model_choice_chr_segments.py" script. The scenario parameters, including the segment size, number of replicates, SNP density, and specification of results from genomes made in SLiM can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate and output the average parameter values for each model.
+
+
+
+#Step5: 
+#plot results for Supp. Fig. 3:
+#Use the "plot_fsc_results_single_chr.py" script. The scenario parameters, including the segment size, number of replicates, SNP density, and specification of results from genomes made in SLiM can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate, then plot the estimated size history using those model parameters.
+
+
