@@ -33,7 +33,9 @@ python OtherScripts/subsample_ms.py output_single_chr_${chr_size}_rep${replicate
 
 
 #Step3: make the input file (.tab format) for MSMC
-less sampled_${chr_size_as_Str}_${num_of_haplotypes}indv_rep${replicate_num}.ms |python OtherScripts/ms2multihetsep.py "sampled_${chr_size_as_str}_${num_of_haplotypes}indv_rep${replicate_num}.ms" $chr_size_as_int > converted_${chr_size_as_str}_${num_of_haplotypes}indv_rep${replicate_num}.tab
+less sampled_${chr_size_as_Str}_${num_of_haplotypes}indv_rep${replicate_num}.ms |python ms2multihetsep.py "sampled_${chr_size_as_str}_${num_of_haplotypes}indv_rep${replicate_num}.ms" $chr_size_as_int > converted_${chr_size_as_str}_${num_of_haplotypes}indv_rep${replicate_num}.tab
+
+#where ms2multihetsep.py was obtained from - https://github.com/stschiff/msmc-tools/blob/master/ms2multihetsep.py
 
 #Possible inputs:
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
