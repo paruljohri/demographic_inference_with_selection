@@ -9,10 +9,10 @@ This is the list of files and folders that are included in the Supplemental info
 - Pipeline_MSMC_human_chr.txt //workflow for human-like genomes under different demographic histories and selection with MSMC.\
 - Pipeline_FSC_human_chr.txt //workflow for human-like genomes under different demographic histories and selection with fastsimcoal2.
 
-2. Commandlines used to generate every Figure and table (including supplementary ones):
+2. Commandlines used to generate every Figure and table (including supplementary ones):\
 Folder: CommandLines
 
-3. Scripts to perform simulations in SliM.
+3. Scripts to perform simulations in SliM.\
 Folder: SlimScripts
 - eqm_single_chr_1Mb.slim //Slim script for 1Mb chromosome under neutral equilibrium\
 - eqm_single_chr_10Mb.slim //Slim script for 10Mb chromosome under neutral equilibrium\
@@ -35,11 +35,11 @@ Folder: SlimScripts
 - decline_2fold_dfe_150Mb_22chr_scaled_genome10.slim //Slim script for 2-fold instantaneous decline (10% of the genome is exonic)\
 - decline_2fold_dfe_150Mb_22chr_scaled_genome05.slim //Slim script for 2-fold instantaneous decline (5% of the genome is exonic)
 
-4. Script to perform simulations in msprime
+4. Script to perform simulations in msprime\
 Folder: MsprimeScripts
 - simulate_msprime.py //Python script to simulate neutral equilibrium for varying chromosome segments and providing an output in .ms format
 
-5. Other scripts used to process the input and output files generated for/by MSMC and fastsimcoal2.
+5. Other scripts used to process the input and output files generated for/by MSMC and fastsimcoal2.\
 Folder: OtherScripts
 - AIC_model_choice.py //Model selection in fastsimcoal2\
 - genome05_positions.txt, genome10_positions.txt, genome20_positions.txt //genomic position of the exons, introns and intergenic regions simulated.\
@@ -51,26 +51,26 @@ Folder: OtherScripts
 - SFS_maker_single_segment_all_SNPs.py //Create an SFS for a single chromosome segment from the .ms file.\
 - SFS_maker_single_segment_thinned_SNPs.py //Create an SFS for a single chromosome segment from the .ms file only using SNPs that are at least 5kb apart from each other.
 
-6. Scripts used to perform Approximate Bayesian Computation (ABC)
+6. Scripts used to perform Approximate Bayesian Computation (ABC)\
 Folder: ABCScripts //Includes scripts for simulations, calculating statistics and performing ABC + plotting results
 
-7. Output files of MSMC
+7. Output files of MSMC\
 Folder: MSMC_OutputFiles //Output files of MSMC from all evolutionary scenarios.
 
-8. Input files for fastsimcoal2
+8. Input files for fastsimcoal2\
 Folder: Fastsimcoal2_InputFiles
 - .tpl and .est files for equilibrium\
 - .tpl and .est files for instantaneous change\
 - .tpl and .est files for exponential change\
 - .tpl and .est files for instant bottleneck
 
-9. Input SFS for fastsimcoal2
+9. Input SFS for fastsimcoal2\
 Folder: Fastsimcoal2_InputFiles_SFS \\SFS input files needed to run fastsimcoal2. View the Readme in the folder to  access the correct file.\
 
-10. Output files from fastsimcoal2
+10. Output files from fastsimcoal2\
 Folder: Fastsimcoal2_OutputFiles // *.bestlhood files //The ".bestlhood" output files from fastsimcoal2 containing the estimated parameters and maximum estimated likelhood value for any particular run.\
 
-11. Scripts to perform analytical calculations
+11. Scripts to perform analytical calculations\
 Folder: AnalyticalCalculations
 - Analytical_size_change_B.nb //Mathematica notebook to calculate the theoretical expectations of B with population size change\
 - Expgrow-prog.txt //An example program that calculates analytical expectations of B and the SFS for exponential growth model.
