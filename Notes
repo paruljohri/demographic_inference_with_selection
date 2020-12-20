@@ -3,19 +3,7 @@ This is what we had there - ">>All plots of MSMC and fastsimcoal2 results where 
 can have if time
 
 
-2. Upload MSMC_outputfiles- what is  easiest.
-Folder structure or not? ~2,100 files
-genome20/genome10/genome05 -> eqm/decline_6fold/growth_30fold/decline_2fold/growth_2fold -> neutrality/dfe1/dfe2/dfe3/dfe4/dfe5/dfe6.zip (20 files in each folder)
+2. Make a key for FSC output files and MSMC output files
 
-3. Upload SFS for FSC
-Folder structure woudl be ~4,200 files
-genome20/genome10/genome05 -> eqm/decline_6fold/growth_30fold/decline_2fold/growth_2fold -> neutrality/dfe1/dfe2/dfe3/dfe4/dfe5/dfe6.zip (40 files in each folder)
-
-4. Upload output for FSC
-Folder structure woudl be ~42,000 files
-genome20/genome10/genome05 -> eqm/decline_6fold/growth_30fold/decline_2fold/growth_2fold -> neutrality/dfe1/dfe2/dfe3/dfe4/dfe5/dfe6.zip (400 files in each folder)
-
-
-5. double check everything.
 
 
