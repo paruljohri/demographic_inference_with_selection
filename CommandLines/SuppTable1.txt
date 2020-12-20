@@ -1,1 +1,48 @@
+#Command lines to generate Supp Table 1
+#Simulations of varying chromomsomal sizes under neutral equilibrium and inference of parameters under equilibrium with FSC
+#Updated on Dec 20, 2020
 
+#Step1: simulations in SliM
+>> slim -d d_seed=${seed} -d "d_repID='${replicate_num}'" -d "d_folder='${output_folder}'" SlimScripts/eqm_single_chr_${chr_size}.slim
+
+#Possible inputs:
+#${seed} = (any random seed of your choosing) = ${replicate_num}
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+#${output_folder} = (folder that newly created .ms files will be output to)
+
+#Step 2: simulations in Msprime:
+>> python MsprimeScripts/simulate_msprime.py eqm_neutral_10Mb_msp 10000000 1 ${replicate_num} ${seed}
+>> python MsprimeScripts/simulate_msprime.py eqm_neutral_50Mb_msp 50000000 1 ${replicate_num} ${seed}
+>> python MsprimeScripts/simulate_msprime.py eqm_neutral_200Mb_msp 200000000 1 ${replicate_num} ${seed}
+>> python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${replicate_num} ${seed}
+
+#Possible inputs:
+#${seed} = (any random seed of your choosing) = ${replicate_num}
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+
+
+
+#Step3: make SFS for varying SNP densities
+>> python OtherScripts/SFS_maker_single_chr_all_SNPs.py output_single_chr_${chr_size_as_str}_rep${replicate_num}.ms ${chr_size_as_int} ratio_file_${chr_size_as_str}_rep${replicate_num}.txt MASTER_all_${chr_size_as_str}_rep${replicate_num}_DAFpop0.obs #For including all SNPs
+>> python OtherScripts/SFS_maker_single_chr_thinned_SNPs.py output_single_chr_${chr_size_as_str}_rep${replicate_num}.ms ${chr_size_as_int} ratio_file_${chr_size_as_str}_rep${replicate_num}.txt MASTER_thinned_${thinning_size_as_str}_${chr_size_as_str}_rep${replicate_num}_DAFpop0.obs ${thinning_size_as_int}
+
+#Possible inputs:
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+#${chr_size_as_str} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${chr_size_as_int} = (size of segment in base pairs, i.e. 1Mb would be 1000000)
+#${thinning_size_as_str} = (the desired distance between counted SNPs as a string, which for this project where 5kb, 50kb, and 100kb)
+#${thinning_size_as_int} = (the desired distance between counted SNPs in base pairs, so for a thinning of 5kb, type 5000)
+#ratio_file_${chr_size_as_str}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking for each replicate separately. This file is an output of the script "SFS_maker_single_chr_all_SNPs.py" and used as an input file in the script "SFS_maker_single_chr_thinned_SNPs.py".
+
+
+
+#Step4: run fastsimcoal2
+fsc26 -t Fastsimcoal2_InputFiles/eqm.tpl -n 150000 -d -e Fastsimcoal2_InputFiles/eqm.est -M -L 50 -q -T
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${chr_size}_rep${replicate_num}_DAFpop0.obs
+
+#Possible inputs:
+#${tested_model} = (eqm, size_change_exponential, size_change_inst, inst_bot)
+#${SNP_density} = (all, thinned_5kb, thinned_50kb, thinned_100kb)
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
