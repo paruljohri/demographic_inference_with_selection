@@ -117,5 +117,43 @@ where ${input_filenames} = converted_150Mb_2indv_genome${replicate_num}_chr1_${d
 
 
 
-#Step9: transform MSMC output files, average them and plot them
-Use the "plot_msmc_and_fsc_results.py" script.  The scenario parameters, including the demographic model, exon density, DFE shape, SNP density, masking state, replicate number, and trial number, can be configured in the script itself. 
+#Step9: make SFS for varying SNP densities
+python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${input_filenames} ${size} ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt MASTER_all_recombination+mutation_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+python OtherScripts/SFS_maker_human_genome_thinned_SNPs.py ${input_filenames} ${size} ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt MASTER_thinned_5kb_recombination+mutation_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs 5000
+
+where ${input_filenames} = "output_genome${replicate_num}_chr1_{masking_state} output_genome${replicate_num}_chr2_${masking_state} ... output_genome${replicate_num}_chr22_${masking_state}" for all 22 chromosomes in the genome
+
+#Possible inputs:
+#${DFE} = (0, 4)
+#${demographic_model} - (eqm, growth, decline)
+#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
+#${masking_state} = (masked, masked_random_regions, masked_centromere, masked_centromere+random_regions)
+#${replicate_num} = (1, 2, 3)
+#${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
+#${size} = (The size of each chromosome in the genome in base pairs, which will vary depending on the functional density of the chromosome and the type of masking that was applied. Below are the possible sizes.)
+#ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking for each replicate separately. This file is an output of the script "SFS_maker_human_genome_all_SNPs.py" and used as an input file in the script "SFS_maker_human_genome_thinned_SNPs.py".
+
+#Below are the base sizes for each exon density with just exon masking performed. In additon, one must subtract an additional size from these values depending on the masking size:
+#genome05 = 142354366
+#genome10 = 135572119
+#genome20 = 118424753
+#If random masking was applied, subtract 15,000,000. If centromere masking was applied, subtract 4,000,000. If both random masking and centromere masking were applied, subtract 19,000,000.
+
+
+
+#Step10: run fastsimcoal2
+fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/${tested_model}.est -M -L 50 -q -T
+#uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_thinned_5kb_recombination+mutation_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+
+#Possible inputs:
+#${DFE} = (0, 4)
+#${tested_model} = (eqm, size_change_exponential, size_change_inst, inst_bot)
+#${demographic_model} - (eqm, growth, decline)
+#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
+#${masking_state} = (masked, masked_random_regions, masked_centromere, masked_centromere+random_regions)
+#${replicate_num} = (1, 2, 3)
+
+
+
+#Step11: transform MSMC output files, average them and plot them
+Use the "plot_msmc_and_fsc_results_human_genome_variable_rec_and_mut.py" script.  The scenario parameters, including the demographic model, exon density, DFE shape, SNP density, masking state, replicate number, and trial number, can be configured in the script itself. 
