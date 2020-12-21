@@ -8,22 +8,23 @@
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100) #For each chromosome size 100 replicates were simulated.
 
 
-#For human-like genomes simulated, the files are in folder - Fastsimcoal2_Human_Genome_SFS_InputFiles.rar
-#Files for results from genomes made with fixed recombination and mutation rates are named as follows: MASTER_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
-where
-${SNP_density} = (all, thinned_5kb)
-${demographic_model} = (eqm, growth, decline)
-${masking_state} = (masked, unmasked)
-${exon_density} = (genome05, genome10, genome20)
-${DFE} = (0, 1, 2, 3, 4, 5, 6) where ${DFE}=0 corresponds to neutrality
-${replicate_num} = (1,2,3,4,5,6,7,8,9,10)
 
+#For human-like genomes simulated - Fastsimcoal2_Human_Genome_SFS_InputFiles.rar
+
+#Files for results from genomes made with fixed recombination and mutation rates are named as follows: MASTER_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+#where
+#${SNP_density} = (all, thinned_5kb)
+#${demographic_model} = (eqm, growth, decline)
+#${masking_state} = (masked, unmasked)
+#${exon_density} = (genome05, genome10, genome20)
+#${DFE} = (0, 1, 2, 3, 4, 5, 6) where ${DFE}=0 corresponds to neutrality
+#${replicate_num} = (1,2,3,4,5,6,7,8,9,10)
 
 #Files for results from genomes made with variable recombination and mutation rates are named as follows: MASTER_${SNP_density}_recombination+mutation_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
-where
-${SNP_density} = (all, thinned_5kb)
-${demographic_model} = (eqm, growth, decline)
-${masking_state} = (masked, masked_random_regions, masked_centromere, masked_centromere+random_regions)
-${exon_density} = (genome05, genome10, genome20)
-${DFE} = (0, 4) where ${DFE}=0 corresponds to neutrality
-${replicate_num} = (1,2,3)
+#where
+#${SNP_density} = (all, thinned_5kb)
+#${demographic_model} = (eqm, growth, decline)
+#${masking_state} = (masked, masked_random_regions, masked_centromere, masked_centromere+random_regions)
+#${exon_density} = (genome05, genome10, genome20)
+#${DFE} = (0, 4) where ${DFE}=0 corresponds to neutrality
+#${replicate_num} = (1,2,3)
