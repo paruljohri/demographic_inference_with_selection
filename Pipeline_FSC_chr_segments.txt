@@ -22,21 +22,26 @@ python MsprimeScripts/simulate_msprime.py eqm_neutral_1Gb_msp 1000000000 1 ${rep
 
 
 
-#Step2: make SFS for varying SNP densities
-python OtherScripts/SFS_maker_single_chr_all_SNPs.py output_single_chr_${chr_size_as_str}_rep${replicate_num}.ms ${chr_size_as_int} ratio_file_${chr_size_as_str}_rep${replicate_num}.txt MASTER_all_${chr_size_as_str}_rep${replicate_num}_DAFpop0.obs #For including all SNPs
-python OtherScripts/SFS_maker_single_chr_thinned_SNPs.py output_single_chr_${chr_size_as_str}_rep${replicate_num}.ms ${chr_size_as_int} ratio_file_${chr_size_as_str}_rep${replicate_num}.txt MASTER_thinned_${thinning_size_as_str}_${chr_size_as_str}_rep${replicate_num}_DAFpop0.obs ${thinning_size_as_int} #For thinning SNPs to 1 in X SNPs
+#Step2: make SFS for all SNPs
+>> python OtherScripts/get_sfs_for_fsc.py -inputFolder /path/to/ms/files/${chr_size} -filename output_single_chr_${chr_size}_rep${replicate_num}.ms -outputFolder eqm_neutral_${chr_size}_slim -chrLength ${chr_size} -num_indv 100
 
 #Possible inputs:
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
-#${chr_size_as_str} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
-#${chr_size_as_int} = (size of segment in base pairs, i.e. 1Mb would be 1000000)
-#${thinning_size_as_str} = (the desired distance between counted SNPs as a string, which for this project where 5kb, 50kb, and 100kb)
-#${thinning_size_as_int} = (the desired distance between counted SNPs in base pairs, so for a thinning of 5kb, type 5000)
-#ratio_file_${chr_size_as_str}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking for each replicate separately. This file is an output of the script "SFS_maker_single_chr_all_SNPs.py" and used as an input file in the script "SFS_maker_single_chr_thinned_SNPs.py".
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
 
 
 
-#Step3: run fastsimcoal2
+#Step3: make SFS for thinned SNPs
+>> python OtherScripts/get_sfs_for_fsc_thin.py -inputFolder /path/to/ms/files/${chr_size} -filename output_single_chr_${chr_size}_rep${replicate_num}.ms -outputFolder eqm_neutral_${chr_size}_slim -chrLength ${chr_size} -num_indv 100 -thinningInterval ${thinning_distance}
+
+#Possible inputs:
+#${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${thinning_distance} = (5Kb, 50Kb, 100Kb)
+
+
+
+#Step4: run fastsimcoal2
 fsc26 -t Fastsimcoal2_InputFiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal2_InputFiles/${tested_model}.est -M -L 50 -q -T
 #uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${chr_size}_rep${replicate_num}_DAFpop0.obs
 
@@ -47,5 +52,6 @@ fsc26 -t Fastsimcoal2_InputFiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
 
 
-#Step4: plot results
+
+#Step5: plot results
 Use the "plot_fsc_results_single_chr.py" script.  The scenario parameters, including the segment size, number of replicates, and SNP density can be configured in the script itself. The script will perform an AIC calculation to determine which model is best for each replicate, then plot the estimated size history using those model parameters.
