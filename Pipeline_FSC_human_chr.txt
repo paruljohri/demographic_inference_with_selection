@@ -43,11 +43,19 @@ python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} ${DFE} ${
 
 
 #Step4: make SFS for thinned SNPs:
+>> python OtherScripts/get_sfs_for_fsc_thin_chr22.py -inputFolder /path/to/ms/files -outputFolder path/to/SFS/files -demography ${demographic_model} -genome ${exon_density} -dfe ${DFE} -repNum ${replicate_num} -masking ${masking_state} -thinning ${thinning_distance} -num_indv 100
+
+#Possible inputs:
+#${DFE} = (0, 1, 2, 3, 4, 5, 6)
+#${demographic_model} - (eqm, growth, decline)
+#${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
+#${masking_state} = (unmasked, masked)
+#${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+#${thinning_distance} = (5kb, 100kb)
 
 
 
-
-#Step4: run fastsimcoal2
+#Step5: run fastsimcoal2
 fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal2_Inputfiles/${tested_model}.est -M -L 50 -q -T
 #uses the SFS file Fastsimcoal2_Inputfiles_SFS/MASTER_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
 
@@ -61,5 +69,5 @@ fsc26 -t Fastsimcoal2_Inputfiles/${tested_model}.tpl -n 150000 -d -e Fastsimcoal
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
 
-#Step5: plot results
+#Step6: plot results
 Use the "plot_msmc_and_fsc_results.py" script.  The scenario parameters, including the demographic model, exon density, DFE shape, SNP density, masking state, replicate number, and trial number, can be configured in the script itself. 
