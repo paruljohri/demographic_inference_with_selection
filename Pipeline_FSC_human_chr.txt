@@ -31,33 +31,19 @@ python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} ${DFE} ${
 
 
 
-#Step3: make SFS for varying SNP densities
-python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${input_filenames} ${size} ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt MASTER_all_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
-python OtherScripts/SFS_maker_human_genome_thinned_SNPs.py ${input_filenames} ${size} ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt MASTER_thinned_${thinning_size_as_str}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs ${thinning_size_as_int}
-
-where ${input_filenames} = "output_genome1_chr1_${masking_state} output_genome1_chr2_${masking_state} ... output_genome1_chr21_${masking_state} output_genome1_chr22_${masking_state}" for all 22 chromosomes in the genome
+#Step3: make SFS for all SNPs
+>> python OtherScripts/get_sfs_for_fsc_chr22.py -inputFolder /path/to/ms/files -outputFolder path/to/SFS/files -demography ${demographic_model} -genome ${exon_density} -dfe ${DFE} -repNum ${replicate_num} -masking ${masking_state} -num_indv 100
 
 #Possible inputs:
 #${DFE} = (0, 1, 2, 3, 4, 5, 6)
 #${demographic_model} - (eqm, growth, decline)
 #${exon_density} = (genome05, genome10, genome20) #where genomeX represents a genome that is X% exonic
 #${masking_state} = (unmasked, masked)
-#${thinning_size_as_str} = (the desired distance between counted SNPs as a string, which for this project where 5kb, 50kb, and 100kb)
-#${thinning_size_as_int} = (the desired distance between counted SNPs in base pairs, so for a thinning of 5kb, type 5000)
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-#${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
-#${size} = (The size of each chromosome in the genome in base pairs, which will vary depending on the functional density of the chromosome and whether or not its exons are masked. Below are the possible sizes.)
-#ratio_file_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking for each replicate separately. This file is an output of the script "SFS_maker_human_genome_all_SNPs.py" and used as an input file in the script "SFS_maker_human_genome_thinned_SNPs.py".
 
-#Possible sizes
-#When exons are not masked:
-#genome05 = 150018600
-#genome10 = 150029950
-#genome20 = 150003700
-#When exons are masked:
-#genome05 = 142354366
-#genome10 = 135572119
-#genome20 = 118424753
+
+#Step4: make SFS for thinned SNPs:
+
 
 
 
