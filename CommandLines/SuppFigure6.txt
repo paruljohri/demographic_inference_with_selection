@@ -19,7 +19,6 @@ slim -d d_seed=${seed} -d d_f0=70 -d d_f1=0 -d d_f2=0 -d d_f3=30 -d "d_simID='6'
 
 
 
-
 #Step2: mask exonic regions:
 python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} ${DFE} ${replicate_num} ${chromosome_num}
 
@@ -30,19 +29,14 @@ python OtherScripts/mask_coding_regions_human.py ${path_to_chromosome} ${DFE} ${
 
 
 
-#Step3: make SFS for varying SNP densities
-python OtherScripts/SFS_maker_human_genome_all_SNPs.py ${input_filenames} 118424753 ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt MASTER_all_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs
-python OtherScripts/SFS_maker_human_genome_thinned_SNPs.py ${input_filenames} 118424753 ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt MASTER_thinned_100kb_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}_DAFpop0.obs 100000
+#Step3: make SFS for SNPs separated by 100 kb
+>> python OtherScripts/get_sfs_for_fsc_thin_chr22.py -inputFolder /path/to/ms/files -outputFolder path/to/SFS/files -demography ${demographic_model} -genome genome20 -dfe ${DFE} -repNum ${replicate_num} -masking masked -thinning 100kb -num_indv 100
 
-where ${input_filenames} = "output_genome1_chr1_masked output_genome1_chr2_masked ... output_genome1_chr21_masked output_genome1_chr22_masked" for all 22 chromosomes in the genome
 
 #Possible inputs:
 #${DFE} = (0, 1, 2, 3, 4, 5, 6)
 #${demographic_model} = (eqm, growth, decline)
 #${replicate_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-#${chromosome_num} = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)
-#ratio_file_${demographic_model}_masked_genome20_sim${DFE}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking for each replicate separately. This file is an output of the script "SFS_maker_single_chr_all_SNPs.py" and used as an input file in the script "SFS_maker_single_chr_thinned_SNPs.py".
-
 
 
 
