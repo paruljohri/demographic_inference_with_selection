@@ -16,16 +16,13 @@
 
 
 #Step2: make SFS for varying SNP densities
->> python OtherScripts/SFS_maker_single_chr_all_SNPs.py output_single_chr_${chr_size_as_str}_rep${replicate_num}.ms ${chr_size_as_int} ratio_file_${chr_size_as_str}_rep${replicate_num}.txt MASTER_all_${chr_size_as_str}_rep${replicate_num}_DAFpop0.obs #For including all SNPs
->> python OtherScripts/SFS_maker_single_chr_thinned_SNPs.py output_single_chr_${chr_size_as_str}_rep${replicate_num}.ms ${chr_size_as_int} ratio_file_${chr_size_as_str}_rep${replicate_num}.txt MASTER_thinned_${thinning_size_as_str}_${chr_size_as_str}_rep${replicate_num}_DAFpop0.obs ${thinning_size_as_int} #For thinning SNPs to 1 in X SNPs
+>> python OtherScripts/get_sfs_for_fsc.py -inputFolder /path/to/ms/files/${chr_size} -filename output_single_chr_${chr_size}_rep${replicate_num}.ms -outputFolder eqm_neutral_${chr_size}_slim -chrLength ${chr_size} -num_indv 100
+>> python OtherScripts/get_sfs_for_fsc_thin.py -inputFolder /path/to/ms/files/${chr_size} -filename output_single_chr_${chr_size}_rep${replicate_num}.ms -outputFolder eqm_neutral_${chr_size}_slim -chrLength ${chr_size} -num_indv 100 -thinningInterval ${thinning_distance}
 
 #Possible inputs:
 #${replicate_num} = (1, 2, 3, 4, 5, ..., 99, 100)
-#${chr_size_as_str} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
-#${chr_size_as_int} = (size of segment in base pairs, i.e. 1Mb would be 1000000)
-#${thinning_size_as_str} = (the desired distance between counted SNPs as a string, which for this project where 5kb, 50kb, and 100kb)
-#${thinning_size_as_int} = (the desired distance between counted SNPs in base pairs, so for a thinning of 5kb, type 5000)
-#ratio_file_${chr_size_as_str}_rep${replicate_num}.txt -> This is file that is created to proportionally scale down the d0_0 class of the SFS after masking for each replicate separately. This file is an output of the script "SFS_maker_single_chr_all_SNPs.py" and used as an input file in the script "SFS_maker_single_chr_thinned_SNPs.py".
+#${chr_size} = (1Mb, 10Mb, 50Mb, 200Mb, 1Gb)
+#${thinning_distance} = (5Kb, 50Kb, 100Kb)
 
 
 
