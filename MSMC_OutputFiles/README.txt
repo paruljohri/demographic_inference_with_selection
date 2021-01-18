@@ -12,7 +12,7 @@
 
 #For human-like genomes simulated, the files are in folder - MSMC_Human_Genome_OutputFiles.rar
 
-#Files for results from genomes made with fixed recombination and mutation rates are named as follows: RAW_rep${replicate_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.final.txt
+#Files for results from genomes made with fixed recombination and mutation rates, found in the "fixed_rec_and_mut" folder, are named as follows: RAW_rep${replicate_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.final.txt
 #where
 #${demographic_model} = (eqm, growth, decline)
 #${masking_state} = (masked, unmasked)
@@ -20,7 +20,7 @@
 #${DFE} = (0, 1, 2, 3, 4, 5, 6) where ${DFE}=0 corresponds to neutrality
 #${replicate_num} = (1,2,3,4,5,6,7,8,9,10)
 
-#Files for results from genomes made with variable recombination and mutation rates are named as follows: RAW_rep${replicate_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.final.txt
+#Files for results from genomes made with variable recombination and mutation rates, found in the "variable_rec_and_mut" folder, are named as follows: RAW_rep${replicate_num}_${demographic_model}_sim${DFE}_${exon_density}_${masking_state}.final.txt
 #where
 #${demographic_model} = (eqm, growth, decline)
 #${masking_state} = (masked, masked_random_regions, masked_centromere, masked_centromere+random_regions)
