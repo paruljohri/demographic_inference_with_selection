@@ -10,8 +10,7 @@
 
 
 #For human-like genomes simulated - Fastsimcoal2_Human_Genome_SFS_InputFiles.rar
-
-#Files for results from genomes made with fixed recombination and mutation rates are named as follows: MASTER_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+#Files for results from genomes made with fixed recombination and mutation rates are located in the "fixed_rec_and_mut" folder and are named as follows: MASTER_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
 #where
 #${SNP_density} = (all, thinned_5kb)
 #${demographic_model} = (eqm, growth, decline)
@@ -20,7 +19,7 @@
 #${DFE} = (0, 1, 2, 3, 4, 5, 6) where ${DFE}=0 corresponds to neutrality
 #${replicate_num} = (1,2,3,4,5,6,7,8,9,10)
 
-#Files for results from genomes made with variable recombination and mutation rates are named as follows: MASTER_${SNP_density}_recombination+mutation_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
+#Files for results from genomes made with variable recombination and mutation rates are located in the "variable_rec_and_mut" folder and named as follows: MASTER_${SNP_density}_recombination+mutation_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_DAFpop0.obs
 #where
 #${SNP_density} = (all, thinned_5kb)
 #${demographic_model} = (eqm, growth, decline)
