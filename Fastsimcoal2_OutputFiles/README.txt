@@ -14,7 +14,7 @@
 
 
 #For human-like genomes simulated, the files are in folder - Fastsimcoal2_Human_Genome_OutputFiles.rar
-#Files for results from genomes made with fixed recombination and mutation rates are named as follows: ${model_type}_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_trial${trial_num}.bestlhoods
+#Files for results from genomes made with fixed recombination and mutation rates, found in the "fixed_rec_and_mut" folder, are named as follows: ${model_type}_${SNP_density}_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_trial${trial_num}.bestlhoods
 #where
 #${model_type} = (eqm, size_change_exponential, size_change_inst, inst_bot)
 #${SNP_density} = (all, thinned_5kb)
@@ -25,7 +25,7 @@
 #${replicate_num} = (1,2,3,4,5,6,7,8,9,10)
 #${trial_num} = (1,2,3,4,5,6,7,8,9,10)
 
-#Files for results from genomes simulated under variable recombination and mutation rate maps with various types of additional masking are named as follows: ${model_type}_${SNP_density}_recombination+mutation_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_trial${trial_num}.bestlhoods
+#Files for results from genomes simulated under variable recombination and mutation rate maps with various types of additional masking, found in the "variable_rec_and_mut" folder, are named as follows: ${model_type}_${SNP_density}_recombination+mutation_${demographic_model}_${masking_state}_${exon_density}_sim${DFE}_rep${replicate_num}_trial${trial_num}.bestlhoods
 #where
 #${model_type} = (eqm, size_change_exponential, size_change_inst, inst_bot)
 #${SNP_density} = (all, thinned_5kb)
