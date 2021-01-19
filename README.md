@@ -1,7 +1,7 @@
 # demographic_inference_with_selection
 #Updated on Dec 17th, 2020
 
-This is the list of files and folders that are included in the Supplemental information for the manuscript titled "The impact of purifying and background selection on the inference of population history: problems and prospects" by Johri et al., which can be found here - https://www.biorxiv.org/content/10.1101/2020.04.28.066365v3 . Contact pjohri1@asu.edu for questions.
+This is the list of files and folders that are included in the Supplemental information for the manuscript titled "The impact of purifying and background selection on the inference of population history: problems and prospects" by Johri et al., which can be found here - https://www.biorxiv.org/content/10.1101/2020.04.28.066365v4 . Contact pjohri1@asu.edu for questions.
 
 1. General workflow and command lines for performing simulations and demographic inference:
 - Pipeline_MSMC_chr_segments.txt //workflow for chromosome segments of varying sizes under neutral equilibrium with MSMC.\
