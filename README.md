@@ -54,23 +54,26 @@ Folder: OtherScripts
 6. Scripts used to perform Approximate Bayesian Computation (ABC)\
 Folder: ABCScripts //Includes scripts for simulations, calculating statistics and performing ABC + plotting results
 
-7. Output files of MSMC\
+7. Scripts used for simulating variable mutation and recombination rates
+Folder: RecMutnRateMapScripts
+
+8. Output files of MSMC\
 Folder: MSMC_OutputFiles //Output files of MSMC from all evolutionary scenarios.
 
-8. Input files for fastsimcoal2\
+9. Input files for fastsimcoal2\
 Folder: Fastsimcoal2_InputFiles
 - .tpl and .est files for equilibrium\
 - .tpl and .est files for instantaneous change\
 - .tpl and .est files for exponential change\
 - .tpl and .est files for instant bottleneck
 
-9. Input SFS for fastsimcoal2\
+10. Input SFS for fastsimcoal2\
 Folder: Fastsimcoal2_InputFiles_SFS \\SFS input files needed to run fastsimcoal2. View the Readme in the folder to  access the correct file.\
 
-10. Output files from fastsimcoal2\
+11. Output files from fastsimcoal2\
 Folder: Fastsimcoal2_OutputFiles // *.bestlhood files //The ".bestlhood" output files from fastsimcoal2 containing the estimated parameters and maximum estimated likelhood value for any particular run.\
 
-11. Scripts to perform analytical calculations\
+12. Scripts to perform analytical calculations\
 Folder: AnalyticalCalculations
 - Analytical_size_change_B.nb //Mathematica notebook to calculate the theoretical expectations of B with population size change\
 - Expgrow-prog.txt //An example program that calculates analytical expectations of B and the SFS for exponential growth model.
