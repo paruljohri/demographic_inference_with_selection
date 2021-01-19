@@ -46,10 +46,10 @@ Folder: OtherScripts
 - mask_coding_regions_human.py //Remove or mask the exonic regions from a .ms file.\
 - msmc_average_file_maker.py //Average MSMC outputs from replicates over fixed time intervals.\
 - plot_msmc_and_fsc_results.py //Plot the population size history estimates of either fastsimcoal2, MSMC, or both togethor.\ 
-- SFS_maker_human_genome_all_SNPs.py //Create an SFS for a human-like genome from the 22 .ms chromosome files.\
-- SFS_maker_human_genome_thinned_SNPs.py //Create an SFS for a human-like genome from the 22 .ms chromosome files only using SNPs that are at least 5kb apart from each other.\
-- SFS_maker_single_segment_all_SNPs.py //Create an SFS for a single chromosome segment from the .ms file.\
-- SFS_maker_single_segment_thinned_SNPs.py //Create an SFS for a single chromosome segment from the .ms file only using SNPs that are at least 5kb apart from each other.
+- get_sfs_for_fsc_chr22.py //Create an SFS for a human-like genome from the 22 .ms chromosome files.\
+- get_sfs_for_fsc_chr22_thin.py //Create an SFS for a human-like genome from the 22 .ms chromosome files using thinned SNPs.\
+- get_sfs_for_fsc.py //Create an SFS for a single chromosome segment from the .ms file.\
+- get_sfs_for_fsc_thin.py //Create an SFS for a single chromosome segment from the .ms file using thinned SNPs.
 
 6. Scripts used to perform Approximate Bayesian Computation (ABC)\
 Folder: ABCScripts //Includes scripts for simulations, calculating statistics and performing ABC + plotting results
